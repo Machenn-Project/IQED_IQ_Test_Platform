@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
-const loginRouter = require('./routers/auth/Auth'); // Adjust the path as necessary
+const loginRouter = require('./routers/auth/Auth'); 
 
-// Use the router
-app.use('/api', loginRouter); // This will prefix all routes in the router with /api
+
+app.use('/api', loginRouter); 
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
