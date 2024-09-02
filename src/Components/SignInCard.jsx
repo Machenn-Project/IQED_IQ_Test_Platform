@@ -7,14 +7,27 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import { styled } from '@mui/material/styles';
 import ForgotPassword from './ForgotPassword';
-import {DomLink} from '../components';
-
+import {FormTextField} from "../commonComponents";
+import { FormProvider, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { formSchema } from "../utils/schema";
+import {DomLink} from '../components'
 
 const CustomFormHelperText = styled('p')({
   fontSize: '10px',
 }); 
 
 export default function SignInCard() {
+  const formMethods = useForm({
+    resolver: yupResolver(formSchema),
+  });
+
+  const formHandleSubmit = (data) => {
+    console.log("data :", data);
+    formMethods.reset();
+  };
+
+  
   const [errors, setErrors] = React.useState({
     email: '',
     password: '',
@@ -53,7 +66,7 @@ export default function SignInCard() {
         email: data.get('email'),
         password: data.get('password'),
       });
-      // Handle form submission
+     
     }
   };
 

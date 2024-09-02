@@ -27,7 +27,7 @@ const FormTextField = ({ field, type, placeholder }) => {
           inputProps={{
             style: {
               fontSize: '12px',
-              height: "40px",
+              height: "30px",
              
               padding: "0 14px",
               

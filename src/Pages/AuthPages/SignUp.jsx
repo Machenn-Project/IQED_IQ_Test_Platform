@@ -32,7 +32,7 @@ const SignUp = () => {
         component="main"
         sx={{
           backgroundColor: '#FFFFFF',
-          height: { xs: '50vh', md: '75vh' },
+          height: { xs: '65vh', md: '75vh' },
           width: { xs: '60vw', md: '65vw' },
           borderRadius: { xs: '8px', md: '16px' },
           p: 2,

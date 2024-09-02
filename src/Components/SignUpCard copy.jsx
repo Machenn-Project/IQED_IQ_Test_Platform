@@ -4,33 +4,30 @@ import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import { styled } from "@mui/material/styles";
+
+import {FormTextField} from "../commonComponents";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
 import { formSchema } from "../utils/schema";
-import { FormTextField } from "../commonComponents";
-import { DomLink } from '../components';
-import { Link } from "@mui/material";
+import {DomLink} from '../components'
 
 export default function SignUpCard() {
   const formMethods = useForm({
     resolver: yupResolver(formSchema),
   });
 
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [open, setOpen] = React.useState(false);
+  const [showPanel, setShowPanel] = React.useState("createAccount"); // 'createAccount', 'otp', 'createPassword'
 
-  const steps = ["Create Account", "OTP Verification", "Create Password"];
-
+  
   const formHandleSubmit = (data) => {
     console.log("data :", data);
     formMethods.reset();
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  const handleChangeEmailClick = () => {
+    setShowPanel("createAccount");
   };
 
   return (
@@ -43,15 +40,7 @@ export default function SignUpCard() {
         gap: 2,
       }}
     >
-      {/* <Stepper activeStep={activeStep}>
-        {steps.map((label) => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper> */}
-
-      {activeStep === 0 && (
+      {showPanel === "createAccount" && (
         <>
           <Typography
             component="h1"
@@ -77,11 +66,14 @@ export default function SignUpCard() {
                 gap: 1,
               }}
             >
+              
               <FormTextField
                 field={"age"}
                 type={"number"}
                 placeholder={"Age"}
               />
+
+              
               <FormTextField
                 field={"name"}
                 type={"text"}
@@ -111,11 +103,22 @@ export default function SignUpCard() {
                 component="p"
                 sx={{ fontSize: "10px", fontWeight: "bold" }}
               >
-                By clicking 'Next,' you agree to our
-                <span>
-                  <DomLink to="#" text=" Terms and Conditions." fontSize={"10px"} />
+                 By clicking 'Next,' you agree to our 
+                 <span>
+                  <DomLink to="#" text=" Terms and Conditions."  fontSize={"10px"} />
                 </span>
               </Typography>
+              {/* {renderTextField("name", "name", "text", "Name")}
+            {renderTextField(
+              "SclName",
+              "SclName",
+              "text",
+              "School or College Name"
+            )}
+            {renderTextField("Grade", "Grade", "text", "Grade")}
+            {renderTextField("PhNo", "PhNo", "text", "Contact Number")} */}
+              {/* {renderTextField("email", "email", "email", "Email")} */}
+
               <Button
                 type="submit"
                 fullWidth
@@ -134,6 +137,7 @@ export default function SignUpCard() {
               >
                 Next
               </Button>
+
               <Typography sx={{ textAlign: "center", fontSize: "12px" }}>
                 Already have an account?
                 <span>
@@ -145,7 +149,7 @@ export default function SignUpCard() {
         </>
       )}
 
-      {activeStep === 1 && (
+      {showPanel === "otp" && (
         <>
           <Typography
             component="h1"
@@ -161,7 +165,7 @@ export default function SignUpCard() {
           </Typography>
           <Box
             component="form"
-            onSubmit={formMethods.handleSubmit(formHandleSubmit)}
+            onSubmit={handleSubmit}
             noValidate
             sx={{
               display: "flex",
@@ -223,23 +227,24 @@ export default function SignUpCard() {
             </Button>
             <Typography sx={{ textAlign: "center", fontSize: "12px" }}>
               Or change email{" "}
-              <Link
+              <span
                 sx={{ fontWeight: "bold", color: "#0000FF", cursor: "pointer" }}
-                onClick={handleBack}
+                onClick={handleChangeEmailClick}
               >
                 click Here
-              </Link>
+              </span>
             </Typography>
           </Box>
         </>
       )}
 
-      {activeStep === 2 && (
+      {showPanel === "createPassword" && (
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
             alignSelf: "center",
+
             gap: 2,
           }}
         >
@@ -257,7 +262,7 @@ export default function SignUpCard() {
           </Typography>
           <Box
             component="form"
-            onSubmit={formMethods.handleSubmit(formHandleSubmit)}
+            onSubmit={formSubmit()}
             noValidate
             sx={{
               display: "flex",
@@ -275,16 +280,15 @@ export default function SignUpCard() {
               uppercase and lowercase letters, numbers, and special characters,
               and avoid common words.
             </Typography>
-            <FormTextField
-              field={"password"}
-              type={"password"}
-              placeholder={"Password"}
-            />
-            <FormTextField
-              field={"confirmPassword"}
-              type={"password"}
-              placeholder={"Confirm Password"}
-            />
+
+            {renderTextField("password", "password", "password", "Password")}
+            {renderTextField(
+              "Conformpassword",
+              "Conformpassword",
+              "password",
+              "Confirm Password"
+            )}
+
             <Button
               type="submit"
               fullWidth
