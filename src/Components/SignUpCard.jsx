@@ -79,6 +79,7 @@ export default function SignUpCard() {
                 type={"number"}
                 placeholder={"Age"}
               />
+              
               <Typography
                 component="p"
                 sx={{ fontSize: "12px", fontWeight: "bold" }}
