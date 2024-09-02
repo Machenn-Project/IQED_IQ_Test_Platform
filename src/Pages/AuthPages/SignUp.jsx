@@ -3,9 +3,9 @@ import { Box, Grid, Paper, Stack, Typography } from "@mui/material";
 import { AuthCardBg, BgBlur, BlueBg } from '../../assets';
 import Slider from 'react-slick';
 
-import IQEDLogo from '../../Components/Logo';
+import IQEDLogo from '../../components/Logo';
 // import SignUpCard from '../../Components/SignUpCard';
-import SignUpCard from '../../Components/SignUpCard';
+import SignUpCard from '../../components/SignUpCard';
 const NextArrow = () => null;
 const PrevArrow = () => null;
 const SignIn = () => {

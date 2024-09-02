@@ -2,11 +2,9 @@ import React from 'react';
 import { Box, Grid, Paper, Stack, Typography } from "@mui/material";
 import { AuthCardBg, BgBlur, BlueBg } from '../../assets';
 import Slider from 'react-slick';
-import SignInCard from '../../Components/SignInCard';
-import IQEDLogo from '../../Components/Logo';
+import SignInCard from '../../components/SignInCard';
+import IQEDLogo from '../../components/Logo';
 
-const NextArrow = () => null;
-const PrevArrow = () => null;
 const SignIn = () => {
   const settings = {
     dots: false,
@@ -16,8 +14,6 @@ const SignIn = () => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,  // 3 seconds per slide
-    nextArrow: <NextArrow />, 
-    prevArrow: <PrevArrow />, 
   };
 
   return (
@@ -64,24 +60,23 @@ const SignIn = () => {
               justifyContent: 'center',
             }}
           >
-            <Slider {...settings} style={{ width: '80%', height: '80%' }}>
+            <Slider {...settings} style={{ width: '80%', height: '80%' }} arrows={false} >
               <Box sx={{
                 backgroundImage: `url(${BgBlur})`,
                 backgroundSize: "cover",
                 width: '100%',
                 height: '60vh',
                 borderRadius: '8px',
-
               }}>
-                <Typography variant="h6"  sx={{
-                  color: '#fff', textAlign: 'left', height: '100%', width:'100%', display: 'flex',
+                <Typography variant="h6" sx={{
+                  color: '#fff', textAlign: 'left', height: '100%', width: '100%', display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  fontSize:'38px',
-                  fontWeight:'bold'
-                 
+                  fontSize: '38px',
+                  fontWeight: 'bold'
+
                 }}>
-                  Overcome Math <br/>Anxiety and Boost <br/>Your Memory.
+                  Overcome Math <br />Anxiety and Boost <br />Your Memory.
                 </Typography>
               </Box>
               <Box sx={{
@@ -92,14 +87,14 @@ const SignIn = () => {
                 borderRadius: '8px',
 
               }}>
-                <Typography variant="h6"  sx={{
-                  color: '#fff', textAlign: 'left', height: '100%', width:'100%', display: 'flex',
+                <Typography variant="h6" sx={{
+                  color: '#fff', textAlign: 'left', height: '100%', width: '100%', display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  fontSize:'38px',
-                  fontWeight:'bold',p:2
+                  fontSize: '38px',
+                  fontWeight: 'bold', p: 2
                 }}>
-                 Embrace math challenges <br/>as opportunities to grow.
+                  Embrace math challenges <br />as opportunities to grow.
                 </Typography>
               </Box>
               <Box sx={{
@@ -110,15 +105,15 @@ const SignIn = () => {
                 borderRadius: '8px',
 
               }}>
-                <Typography variant="h6" 
-                sx={{
-                  color: '#fff', textAlign: 'left', height: '100%', width:'100%',display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize:'38px',
-                  fontWeight:'bold',p:2
-                }}>
-                 A sharp mind holds the key to <br/>unlocking your memory's <br/>full potential.
+                <Typography variant="h6"
+                  sx={{
+                    color: '#fff', textAlign: 'left', height: '100%', width: '100%', display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '38px',
+                    fontWeight: 'bold', p: 2
+                  }}>
+                  A sharp mind holds the key to <br />unlocking your memory's <br />full potential.
                 </Typography>
               </Box>
             </Slider>
