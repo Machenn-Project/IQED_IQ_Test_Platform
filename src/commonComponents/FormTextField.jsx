@@ -26,11 +26,12 @@ const FormTextField = ({ field, type, placeholder }) => {
           helperText={<>{errors[`${field}`]?.message}</>}
           inputProps={{
             style: {
-              height: "100%",
+              fontSize: '12px',
+              height: "40px",
+             
               padding: "0 14px",
-              "&::placeholder": {
-                fontSize: "12px",
-              },
+              
+              
             },
           }}
         />

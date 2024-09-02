@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; 
 
-export const DomLink = ({ to, text }) => {
+const DomLink = ({ to, text }) =>{
   return (
     <Link
       to={to}
@@ -11,3 +11,5 @@ export const DomLink = ({ to, text }) => {
     </Link>
   );
 };
+
+export default DomLink;

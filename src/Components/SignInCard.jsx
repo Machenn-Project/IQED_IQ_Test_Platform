@@ -7,11 +7,12 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import { styled } from '@mui/material/styles';
 import ForgotPassword from './ForgotPassword';
-import { DomLink } from './DomLInk';
+import {DomLink} from '../components';
+
 
 const CustomFormHelperText = styled('p')({
   fontSize: '10px',
-});
+}); 
 
 export default function SignInCard() {
   const [errors, setErrors] = React.useState({

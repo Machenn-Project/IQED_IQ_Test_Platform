@@ -8,7 +8,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import OutlinedInput from '@mui/material/OutlinedInput';
 
-function ForgotPassword({ open, handleClose }) {
+const ForgotPassword = ({ open, handleClose }) => {
   return (
     <Dialog
     

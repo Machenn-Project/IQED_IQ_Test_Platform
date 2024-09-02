@@ -1,14 +1,12 @@
 import React from 'react';
 import { Box, Grid, Paper, Stack, Typography } from "@mui/material";
-import { AuthCardBg, BgBlur, BlueBg } from '../../assets';
+import { AuthCardBg, BgBlur, BlueBg } from '../../assets/Bg';
 import Slider from 'react-slick';
-
-import IQEDLogo from '../../components/Logo';
-// import SignUpCard from '../../Components/SignUpCard';
-import SignUpCard from '../../components/SignUpCard';
+import {Logo} from '../../commonComponents';
+import { AutoTextCarousel, SignUpCard } from '../../components';
 const NextArrow = () => null;
 const PrevArrow = () => null;
-const SignIn = () => {
+const SignUp = () => {
   const settings = {
     dots: false,
     infinite: true,
@@ -43,7 +41,7 @@ const SignIn = () => {
         <Stack direction={{ xs: 'column', md: 'row' }} sx={{ height: "100%", borderRadius: '20px', overflow: 'hidden' }}>
           <Box height="100%" width="100%" m={2}>
             <Box sx={{ display: 'flex' }}>
-              <IQEDLogo />
+              <Logo />
             </Box>
             <Box width={'100%'} height={'90%'} sx={{
               display: 'flex',
@@ -65,64 +63,7 @@ const SignIn = () => {
               justifyContent: 'center',
             }}
           >
-            <Slider {...settings} style={{ width: '80%', height: '80%' }}>
-              <Box sx={{
-                backgroundImage: `url(${BgBlur})`,
-                backgroundSize: "cover",
-                width: '100%',
-                height: '60vh',
-                borderRadius: '8px',
-
-              }}>
-                <Typography variant="h6"  sx={{
-                  color: '#fff', textAlign: 'left', height: '100%', width:'100%', display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize:'38px',
-                  fontWeight:'bold'
-                 
-                }}>
-                  Overcome Math <br/>Anxiety and Boost <br/>Your Memory.
-                </Typography>
-              </Box>
-              <Box sx={{
-                backgroundImage: `url(${BgBlur})`,
-                backgroundSize: "cover",
-                width: '100%',
-                height: '60vh',
-                borderRadius: '8px',
-
-              }}>
-                <Typography variant="h6"  sx={{
-                  color: '#fff', textAlign: 'left', height: '100%', width:'100%', display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize:'38px',
-                  fontWeight:'bold',p:2
-                }}>
-                 Embrace math challenges <br/>as opportunities to grow.
-                </Typography>
-              </Box>
-              <Box sx={{
-                backgroundImage: `url(${BgBlur})`,
-                backgroundSize: "cover",
-                width: '100%%',
-                height: '60vh',
-                borderRadius: '8px',
-
-              }}>
-                <Typography variant="h6" 
-                sx={{
-                  color: '#fff', textAlign: 'left', height: '100%', width:'100%',display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize:'38px',
-                  fontWeight:'bold',p:2
-                }}>
-                 A sharp mind holds the key to <br/>unlocking your memory's <br/>full potential.
-                </Typography>
-              </Box>
-            </Slider>
+              <AutoTextCarousel/>
           </Box>
         </Stack>
       </Paper>
@@ -130,4 +71,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;

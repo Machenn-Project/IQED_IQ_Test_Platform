@@ -1,7 +1,7 @@
-// IQEDLogo.js
+
 import React from 'react';
 import { Box } from '@mui/material';
-import { IQEDLogo } from '../assets';
+import {IQEDLogo} from '../assets'
 
 const Logo = () => (
   <Box sx={{ width: '100px', height: 'auto' }}>

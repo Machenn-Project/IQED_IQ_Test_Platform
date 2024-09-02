@@ -5,12 +5,12 @@ import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
-import { DomLink } from "./DomLInk";
-import { FormTextField } from "../common";
+
+import {FormTextField} from "../commonComponents";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { formSchema } from "../utils/schema";
-
+import {DomLink} from '../components'
 
 export default function SignUpCard() {
   const formMethods = useForm({
@@ -75,15 +75,10 @@ export default function SignUpCard() {
             >
               
               <FormTextField
-                field={"email"}
-                type={"email"}
-                placeholder={"Email"}
+                field={"age"}
+                type={"number"}
+                placeholder={"Age"}
               />
-              {/* <FormTextField
-                field={"email"}
-                type={"email"}
-                placeholder={"Email"}
-              /> */}
               <Typography
                 component="p"
                 sx={{ fontSize: "12px", fontWeight: "bold" }}
@@ -91,6 +86,31 @@ export default function SignUpCard() {
                 Providing your age ensures you get the right IQED experience.
                 For more details, please visit our Privacy Policy.
               </Typography>
+              <FormTextField
+                field={"name"}
+                type={"text"}
+                placeholder={"Name"}
+              />
+              <FormTextField
+                field={"sclName"}
+                type={"text"}
+                placeholder={"School or College Name"}
+              />
+              <FormTextField
+                field={"grade"}
+                type={"text"}
+                placeholder={"Grade"}
+              />
+              <FormTextField
+                field={"phNo"}
+                type={"number"}
+                placeholder={"Contact Number"}
+              />
+              <FormTextField
+                field={"email"}
+                type={"email"}
+                placeholder={"Email"}
+              />
               {/* {renderTextField("name", "name", "text", "Name")}
             {renderTextField(
               "SclName",

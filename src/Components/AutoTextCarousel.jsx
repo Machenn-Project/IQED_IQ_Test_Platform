@@ -1,9 +1,7 @@
 import React from 'react';
 import Slider from 'react-slick';
+import {BgBlur} from '../assets/Bg';
 import { Box, Typography } from '@mui/material';
-import { BgBlur } from '../assets';
-  // Ensure you import or define BgBlur
-
 const AutoTextCarousel = () => {
   const settings = {
     dots: false,
@@ -12,38 +10,67 @@ const AutoTextCarousel = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000,  // 3 seconds per slide
-        // Hide the previous arrow
+    autoplaySpeed: 3000,  
   };
 
   return (
-    <Box sx={{ width: '100px', height: '100px' }}>
-      <Slider {...settings}>
-        {[ 'Slide 1', 'Slide 2', 'Slide 3' ].map((slide, index) => (
-          <Box
-            key={index}
-            sx={{
-              backgroundImage: `url(${BgBlur})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              width: '100px',
-              height: '100px',
-              borderRadius: '8px',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              color: '#fff',  // Ensure text color contrasts well with the background
-              textAlign: 'center',
-              padding: 2,
-            }}
-          >
-            <Typography variant="h6">
-              {slide}
-            </Typography>
-          </Box>
-        ))}
-      </Slider>
+    <Slider {...settings} style={{ width: '80%', height: '80%' }} arrows={false} >
+    <Box sx={{
+      backgroundImage: `url(${BgBlur})`,
+      backgroundSize: "cover",
+      width: '100%',
+      height: '60vh',
+      borderRadius: '8px',
+    }}>
+      <Typography variant="h6" sx={{
+        color: '#fff', textAlign: 'left', height: '100%', width: '100%', display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: '38px',
+        fontWeight: 'bold'
+
+      }}>
+        Overcome Math <br />Anxiety and Boost <br />Your Memory.
+      </Typography>
     </Box>
+    <Box sx={{
+      backgroundImage: `url(${BgBlur})`,
+      backgroundSize: "cover",
+      width: '100%',
+      height: '60vh',
+      borderRadius: '8px',
+
+    }}>
+      <Typography variant="h6" sx={{
+        color: '#fff', textAlign: 'left', height: '100%', width: '100%', display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: '38px',
+        fontWeight: 'bold', p: 2
+      }}>
+        Embrace math challenges <br />as opportunities to grow.
+      </Typography>
+    </Box>
+    <Box sx={{
+      backgroundImage: `url(${BgBlur})`,
+      backgroundSize: "cover",
+      width: '100%%',
+      height: '60vh',
+      borderRadius: '8px',
+
+    }}>
+      <Typography variant="h6"
+        sx={{
+          color: '#fff', textAlign: 'left', height: '100%', width: '100%', display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '38px',
+          fontWeight: 'bold', p: 2
+        }}>
+        A sharp mind holds the key to <br />unlocking your memory's <br />full potential.
+      </Typography>
+    </Box>
+  </Slider>
   );
 };
 
