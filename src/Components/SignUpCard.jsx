@@ -9,7 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import { formSchema } from "../utils/schema";
+import { formSchema,passwordSchema } from "../utils/schema";
 import { FormTextField } from "../commonComponents";
 import { DomLink } from '../components';
 import { Link } from "@mui/material";
@@ -25,7 +25,7 @@ export default function SignUpCard() {
 
   const formHandleSubmit = (data) => {
     console.log("data :", data);
-    formMethods.reset();
+    // formMethods.reset();
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 

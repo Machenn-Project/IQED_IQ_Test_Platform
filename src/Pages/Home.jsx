@@ -175,7 +175,7 @@ const Home = () => {
           >
             <Button
               component={Link}
-              to="/Signup"
+              to="/GeneralQuizPage"
               variant="contained"
               sx={{
                 m: {xs: '10px', sm: '10px', md: '20px', lg: '20px'},
