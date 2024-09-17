@@ -10,11 +10,72 @@ import {
   ListItem,
   ListItemText,
   Button,
+  CircularProgress,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { quizData } from "../utils/schema";
 import CancelIcon from "@mui/icons-material/Cancel";
-import "./style.css"
+import { useNavigate } from 'react-router-dom';
+
+// Circular Timer Component
+const CircularTimer = ({ timeLeft, totalTime }) => {
+  
+  const progress = ((totalTime - timeLeft) / totalTime) * 100;
+
+  return (
+    <Box
+      sx={{
+        position: "relative",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "150px",
+        height: "150px",
+      }}
+    >
+      {/* Circular Progress */}
+      <CircularProgress
+        variant="determinate"
+        value={progress}
+        sx={{
+          color: "#FFDA55", // Set the progress color to yellow
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100% !important", // Ensure it's full size
+          height: "100% !important",
+        }}
+        thickness={1.5}
+        size={150}
+      />
+      {/* Timer Text in the center of the circle */}
+      <Box
+        sx={{
+          position: "absolute",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          color: "white",
+        }}
+      >
+        {/* Time Left */}
+        <Typography variant="h4" sx={{ fontWeight: "bold", color: "white" }}>
+          {Math.floor(timeLeft / 60)
+            .toString()
+            .padStart(2, "0")}
+          :
+          {(timeLeft % 60).toString().padStart(2, "0")}
+        </Typography>
+        {/* Total Time (Static) */}
+        <Typography variant="body2" sx={{ color: "white", mt: 1 }}>
+          {`${Math.floor(totalTime / 60)}:00 Total`}
+        </Typography>
+      </Box>
+    </Box>
+  );
+};
+
 const Item = ({ children, isSelected, onClick }) => {
   return (
     <Paper
@@ -43,14 +104,15 @@ const Item = ({ children, isSelected, onClick }) => {
 };
 
 const QuizPage = () => {
+  const totalTime = quizData.length * 60; // Total time based on the number of questions (60s per question)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [score, setScore] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(quizData.length * 60); // Total time based on number of questions
+  const [timeLeft, setTimeLeft] = useState(totalTime);
   const [answeredQuestions, setAnsweredQuestions] = useState([]); // Track answers
   const [userAnswers, setUserAnswers] = useState([]); // Track user answers
   const [quizCompleted, setQuizCompleted] = useState(false); // Track if quiz is completed
-
+  const navigate = useNavigate();
   // Timer logic
   useEffect(() => {
     const timer = setInterval(() => {
@@ -99,7 +161,6 @@ const QuizPage = () => {
     // Move to next question
     if (currentQuestionIndex < quizData.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
-      // setSelectedOption(null);
     }
   };
 
@@ -111,10 +172,10 @@ const QuizPage = () => {
 
   const handleSubmit = () => {
     setQuizCompleted(true);
-    alert(`Quiz Completed! Your score: ${score}/${quizData.length}`);
+    navigate('/gq-success', { replace: true });
     console.log(`Quiz Completed! Your score: ${score}/${quizData.length}`);
   };
-
+ 
   const handleQuizListClick = (index) => {
     setCurrentQuestionIndex(index);
     setSelectedOption(userAnswers[index] || null); // Show the previously selected option
@@ -145,6 +206,7 @@ const QuizPage = () => {
             boxShadow: "5px 6px #02216F",
             border: "1px solid",
             borderColor: "#FFDA55",
+            overflow: "hidden",
           }}
         >
           {/* Timer */}
@@ -162,9 +224,9 @@ const QuizPage = () => {
             }}
           >
             <Typography variant="h5">Timer</Typography>
-            <Typography variant="h4" sx={{ fontWeight: "bold" }}>
-              {formatTime(timeLeft)}
-            </Typography>
+
+            {/* Circular Timer Component */}
+            <CircularTimer timeLeft={timeLeft} totalTime={totalTime} />
           </Box>
 
           {/* Quiz List */}
@@ -185,7 +247,6 @@ const QuizPage = () => {
               {quizData.map((quiz, index) => (
                 <ListItem
                   key={index}
-                  // selected={index === currentQuestionIndex}
                   sx={{
                     bgcolor: answeredQuestions.includes(index)
                       ? "#BFFFE2"
@@ -201,7 +262,9 @@ const QuizPage = () => {
                     mt: "2%",
                     "&:hover": {
                       bgcolor:
-                      index === currentQuestionIndex ? "#FFEDAC" : "#e0e0e0",
+                        index === currentQuestionIndex
+                          ? "#FFEDAC"
+                          : "#e0e0e0",
                       cursor: "pointer",
                     },
                   }}
@@ -215,6 +278,7 @@ const QuizPage = () => {
                     }
                     secondary={
                       <Typography variant="body2" fontWeight="400">
+
                         {quiz.question}
                       </Typography>
                     }

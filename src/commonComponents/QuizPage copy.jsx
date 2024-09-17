@@ -9,10 +9,12 @@ import {
   List,
   ListItem,
   ListItemText,
+  Button,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { quizData } from "../utils/schema";
 import CancelIcon from "@mui/icons-material/Cancel";
+import { Navigate } from "react-router-dom";
 
 const Item = ({ children, isSelected, onClick }) => {
   return (
@@ -48,19 +50,20 @@ const QuizPage = () => {
   const [timeLeft, setTimeLeft] = useState(quizData.length * 60); // Total time based on number of questions
   const [answeredQuestions, setAnsweredQuestions] = useState([]); // Track answers
   const [userAnswers, setUserAnswers] = useState([]); // Track user answers
+  const [quizCompleted, setQuizCompleted] = useState(false); // Track if quiz is completed
 
   // Timer logic
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => {
-        if (prevTime > 0) return prevTime - 1;
+        if (prevTime > 0 && !quizCompleted) return prevTime - 1;
+        if (prevTime === 0) handleTimeUp(); // Call function to handle time up logic
         clearInterval(timer);
-        handleTimeUp(); // Call function to handle time up logic
-        return 0;
+        return prevTime;
       });
     }, 1000);
     return () => clearInterval(timer);
-  }, []);
+  }, [quizCompleted]);
 
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
@@ -71,15 +74,12 @@ const QuizPage = () => {
   };
 
   const handleOptionSelect = (option) => {
-    // Get the current question
     const currentQuestion = quizData[currentQuestionIndex];
-  
-    // Track user answers
     const newAnswers = [...userAnswers];
     const previousAnswer = newAnswers[currentQuestionIndex]; // Get the previous answer for this question
     newAnswers[currentQuestionIndex] = option;
     setUserAnswers(newAnswers);
-  
+
     // Adjust score based on the previous and new answers
     if (previousAnswer !== option) {
       if (previousAnswer === currentQuestion.correctAnswer) {
@@ -91,28 +91,31 @@ const QuizPage = () => {
         setScore((prevScore) => prevScore + 1);
       }
     }
-  
+
     // Mark the current question as answered
     setAnsweredQuestions((prevAnswered) => [
       ...new Set([...prevAnswered, currentQuestionIndex]),
     ]);
-  
-    // Move to next question after a delay
-    setTimeout(() => {
-      if (currentQuestionIndex < quizData.length - 1) {
-        setCurrentQuestionIndex(currentQuestionIndex + 1);
-        setSelectedOption(null);
-      } else {
-        console.log(`Quiz Completed! Your score: ${score + 1}/${quizData.length}`);
-        alert("Quiz Completed! Check the console for your score.");
-      }
-    }, 500);
+
+    // Move to next question
+    if (currentQuestionIndex < quizData.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      // setSelectedOption(null);
+    }
   };
-  
 
   const handleTimeUp = () => {
+    setQuizCompleted(true);
+    
     alert("Time's up! The quiz has ended.");
     console.log(`Quiz Ended! Your score: ${score}/${quizData.length}`);
+  };
+
+  const handleSubmit = () => {
+    setQuizCompleted(true);
+    <Navigate to='/gq-success'replace={true}/>
+    alert(`Quiz Completed! Your score: ${score}/${quizData.length}`);
+    console.log(`Quiz Completed! Your score: ${score}/${quizData.length}`);
   };
 
   const handleQuizListClick = (index) => {
@@ -145,6 +148,7 @@ const QuizPage = () => {
             boxShadow: "5px 6px #02216F",
             border: "1px solid",
             borderColor: "#FFDA55",
+            overflow:'hidden'
           }}
         >
           {/* Timer */}
@@ -162,6 +166,7 @@ const QuizPage = () => {
             }}
           >
             <Typography variant="h5">Timer</Typography>
+            
             <Typography variant="h4" sx={{ fontWeight: "bold" }}>
               {formatTime(timeLeft)}
             </Typography>
@@ -185,6 +190,7 @@ const QuizPage = () => {
               {quizData.map((quiz, index) => (
                 <ListItem
                   key={index}
+                  // selected={index === currentQuestionIndex}
                   sx={{
                     bgcolor: answeredQuestions.includes(index)
                       ? "#BFFFE2"
@@ -198,8 +204,12 @@ const QuizPage = () => {
                       : "",
                     borderRadius: "10px",
                     mt: "2%",
+                    "&:hover": {
+                      bgcolor:
+                      index === currentQuestionIndex ? "#FFEDAC" : "#e0e0e0",
+                      cursor: "pointer",
+                    },
                   }}
-                  
                   onClick={() => handleQuizListClick(index)} // Allow navigation by clicking on the quiz item
                 >
                   <ListItemText
@@ -249,9 +259,41 @@ const QuizPage = () => {
               >
                 Quiz {currentQuestionIndex + 1} of {quizData.length}
               </Typography>
-              <IconButton aria-label="Exit" sx={{ color: "#02216F" }}>
-                <CancelIcon />
-              </IconButton>
+              <Stack direction={"row"} spacing={2}>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  onClick={handleSubmit}
+                  sx={{
+                    fontWeight: "bold",
+                    backgroundColor: "#ffff",
+                    color: "#02216F",
+                    boxShadow: "2px 3px #02216F",
+                    borderRadius: {
+                      xs: "5px",
+                      sm: "5px",
+                      md: "10px",
+                      lg: "10px",
+                    },
+                    textTransform: "none",
+                    border: "1px solid",
+                    borderColor: "#02216F",
+                    "&:hover": {
+                      color: "#ffff",
+                      backgroundColor: "#02216F",
+                      transition: "transform 0.3s ease-in-out",
+                      transform: "translateY(-5px)",
+                      boxShadow: "2px 3px #ffff",
+                    },
+                  }}
+                >
+                  Submit
+                </Button>
+
+                <IconButton aria-label="Exit" sx={{ color: "#02216F" }}>
+                  <CancelIcon />
+                </IconButton>
+              </Stack>
             </Box>
 
             <Divider sx={{ bgcolor: "#FFDA55", mb: "3%", height: "2px" }} />

@@ -1,2 +1,3 @@
 import IQEDLogo from '../assets/IQEDLogo.png'
-export  {IQEDLogo};
+import Pop from '../assets/pop.gif'
+export  {IQEDLogo,Pop};

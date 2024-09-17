@@ -5,7 +5,7 @@ import {
   List,
   ListItem,
   ListItemText,
-  Button
+  Button,
 } from "@mui/material";
 import React from "react";
 import { YellowBg } from "../assets/Bg";
@@ -16,35 +16,26 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <Box
-      sx={{
-        backgroundImage: `url(${YellowBg})`,
-        backgroundSize: "cover",
-        height: "100vh",
-        width: "100vw",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
+      // sx={{
+      //   display: "flex",
+      //   flexDirection: "column",
+      // }}
     >
-      <Box
-        sx={{
-          height: "15vh",
-        }}
-      >
+      
         <HomeNav />
-      </Box>
+      
       <Box
         sx={{
           width: "100vw",
+          position:'relative',
+          height:'80vh',
           // backgroundColor: "black",
-          height: "100vh",
+          // height: "100vh",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          pt: "2vh",
-
-          // justifyContent: "center",
+          // pt: "2vh",
+          justifyContent: "center",
         }}
       >
         <Typography
@@ -102,7 +93,7 @@ const Home = () => {
               color: "#ffff",
             }}
           >
-            <List sx={{ listStyleType: "disc",fontSize:'20px' }}>
+            <List sx={{ listStyleType: "disc", fontSize: "20px" }}>
               <ListItem sx={{ display: "list-item" }} disablePadding>
                 <ListItemText
                   primary="There are 30 multiple choice questions."
@@ -120,7 +111,7 @@ const Home = () => {
               </ListItem>
               <ListItem sx={{ display: "list-item" }} disablePadding>
                 <ListItemText
-                  primary="Approximate test time: Ten to fifteen minutes."
+                  primary="Approximate test time: Fifteen minutes."
                   primaryTypographyProps={{
                     fontSize: {
                       xs: "14px",
@@ -165,31 +156,28 @@ const Home = () => {
               </ListItem>
             </List>
           </Box>
-          <Box 
-          sx={{
-            display:'flex',
-            justifyContent:'right',
-            alignItems:'baseline',
-
-          }}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "right",
+              width: '100%',
+              height:'auto',
+            }}
           >
             <Button
               component={Link}
               to="/GeneralQuizPage"
               variant="contained"
               sx={{
-                m: {xs: '10px', sm: '10px', md: '20px', lg: '20px'},
-                height: {xs: '30px', sm: '30px', md: '50px', lg: '50px'},
-                width: {xs: '100%', sm: '100%', md: '30%', lg: '30%'},
-                fontWeight: 'bold',
-                fontSize:{md: '20px', lg: '20px'},
+                fontWeight: "bold",
+                fontSize: { md: "20px", lg: "20px" },
                 backgroundColor: "#FFDA55",
                 color: "#02216F",
                 boxShadow: "2px 3px white",
-                borderRadius: {xs: '5px', sm: '5px', md: '10px', lg: '10px'},
+                borderRadius: { xs: "5px", sm: "5px", md: "10px", lg: "10px" },
                 textTransform: "none",
-                border: '1px solid', 
-                borderColor: 'white', 
+                border: "1px solid",
+                borderColor: "white",
                 "&:hover": {
                   color: "#ffff",
                   backgroundColor: "black",

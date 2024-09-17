@@ -20,14 +20,14 @@ const SignUp = () => {
   };
 
   return (
-    <Box sx={{
-      backgroundImage: `url(${BlueBg})`,
-      backgroundSize: "cover",
+    <Box 
+    sx={{
       height: "100vh",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-    }}>
+    }}
+    >
       <Paper
         component="main"
         sx={{

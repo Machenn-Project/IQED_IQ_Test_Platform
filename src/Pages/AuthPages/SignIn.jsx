@@ -18,8 +18,7 @@ const SignIn = () => {
 
   return (
     <Box sx={{
-      backgroundImage: `url(${BlueBg})`,
-      backgroundSize: "cover",
+      
       height: "100vh",
       display: "flex",
       alignItems: "center",

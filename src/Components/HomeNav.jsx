@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 function HomeNav() {
   return (
-    <AppBar sx={{ backgroundColor: "transparent", boxShadow: "0", p: "2%"}}>
+    <AppBar sx={{ backgroundColor: "transparent", boxShadow: "0", p: "2%",position:'relative'}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1 }}>

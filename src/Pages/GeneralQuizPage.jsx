@@ -7,8 +7,6 @@ const GeneralQuizPage = () => {
   return (
     <Box
       sx={{
-        backgroundImage: `url(${YellowBg})`,
-        backgroundSize: "cover",
         height: "100vh",
         width: "100vw",
         display: "flex",
