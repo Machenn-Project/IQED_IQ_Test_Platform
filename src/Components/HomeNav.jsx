@@ -17,7 +17,7 @@ function HomeNav() {
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Button
-              component={Link}
+              component={Link}  
               to="/Signup"
               fullWidth
               variant="contained"

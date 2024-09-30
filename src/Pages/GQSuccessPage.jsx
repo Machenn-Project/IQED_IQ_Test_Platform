@@ -9,19 +9,23 @@ import EmailIcon from "@mui/icons-material/Email";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 const GQSuccessPage = () => {
   return (
-    <Box>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+        gap:'0'
+      }}
+    >
       <ConfettiEffect />
       <HomeNav />
-
       <Box
         sx={{
-          width: "100vw",
-          position: "relative",
-          height: "auto",
+          flexGrow: 1,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "center",
+          // justifyContent: "center",
         }}
       >
         <Box
@@ -90,7 +94,7 @@ const GQSuccessPage = () => {
           <Button
             startIcon={<EmailIcon />}
             component={Link}
-            to="/Signup"
+            to="/gq-Get-Result"
             fullWidth
             variant="contained"
             sx={{
@@ -116,7 +120,7 @@ const GQSuccessPage = () => {
           <Button
             startIcon={<WhatsAppIcon />}
             component={Link}
-            to="/Signup"
+            to="/GQ-Get-Result-vai-WA"
             fullWidth
             variant="contained"
             sx={{

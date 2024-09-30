@@ -110,8 +110,6 @@ const QuizPage = () => {
   const [answeredQuestions, setAnsweredQuestions] = useState([]); // Track answers
   const [userAnswers, setUserAnswers] = useState([]); // Track user answers
   const [quizCompleted, setQuizCompleted] = useState(false); // Track if quiz is completed
-  // const [questionStartTime, setQuestionStartTime] = useState(Date.now()); // Track when the question starts
-  // const [showFasterThanBolt, setShowFasterThanBolt] = useState(false); // Show message when answered quickly
   const navigate = useNavigate();
   // Timer logic
   useEffect(() => {
@@ -158,18 +156,9 @@ const QuizPage = () => {
       ...new Set([...prevAnswered, currentQuestionIndex]),
     ]);
 
-    // Calculate time spent on the current question
-    // const timeSpent = (Date.now() - questionStartTime) / 1000; 
-    // if (timeSpent < 10) {
-    //   setShowFasterThanBolt(true); 
-    // } else {
-    //   setShowFasterThanBolt(false);
-    // }
-
     // Move to next question
     if (currentQuestionIndex < quizData.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
-      // setQuestionStartTime(Date.now()); // Reset the start time for the next question
     }
   };
 
@@ -188,7 +177,6 @@ const QuizPage = () => {
   const handleQuizListClick = (index) => {
     setCurrentQuestionIndex(index);
     setSelectedOption(userAnswers[index] || null); // Show the previously selected option
-    // setQuestionStartTime(Date.now()); // Reset the start time for the clicked question
   };
 
   const currentQuestion = quizData[currentQuestionIndex];
@@ -198,7 +186,7 @@ const QuizPage = () => {
       sx={{
         width: { xs: "calc(100vw - 30px)", md: "calc(100vw - 80px)" },
         height: { xs: "calc(100vh - 30px)", md: "calc(100vh - 80px)" },
-        // padding: "10px",
+        padding: "10px",
       }}
     >
       <Stack
@@ -335,8 +323,8 @@ const QuizPage = () => {
                   fontSize: "16px",
                   fontWeight: "bold",
                   borderRadius: "20px",
-                  textAlign: "center",
-                  alignItems: "center",
+                  textAlign:'center',
+                  alignItems:'center'
                 }}
               >
                 Nice!! You are faster than Bolt..

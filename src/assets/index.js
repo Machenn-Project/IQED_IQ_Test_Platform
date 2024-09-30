@@ -1,3 +1,4 @@
-import IQEDLogo from '../assets/IQEDLogo.png'
-import Pop from '../assets/pop.gif'
-export  {IQEDLogo,Pop};
+import IQEDLogo from './IQEDLogo.png'
+import Pop from './pop.gif'
+import IQEDIcon from './IQEDIcon.jpg'
+export  {IQEDLogo,Pop,IQEDIcon};

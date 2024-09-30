@@ -16,19 +16,18 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <Box
-      // sx={{
-      //   display: "flex",
-      //   flexDirection: "column",
-      // }}
+    // sx={{
+    //   display: "flex",
+    //   flexDirection: "column",
+    // }}
     >
-      
-        <HomeNav />
-      
+      <HomeNav />
+
       <Box
         sx={{
-          width: "100vw",
-          position:'relative',
-          height:'80vh',
+          width: "100%",
+          position: "relative",
+          height: "100%",
           // backgroundColor: "black",
           // height: "100vh",
           display: "flex",
@@ -56,8 +55,6 @@ const Home = () => {
         <Typography
           sx={{
             textAlign: "center",
-            px: "15px",
-            py: "5px",
             color: "#02216F",
             fontSize: { xs: "40px", sm: "40px", md: "48px", lg: "60px" },
             fontWeight: "bold",
@@ -70,10 +67,10 @@ const Home = () => {
         <Box
           sx={{
             bgcolor: "#02216F",
-            width: { xs: "80%", sm: "80%", md: "55%", lg: "55%" },
-            height: "50%",
+            width: { xs: "80%", sm: "80%", md: {minWidth:"55%"}, lg: "55%" },
+           
             borderRadius: "20px",
-            m: "20px",
+            // m: "20px",
             p: { xs: "20px", sm: "1%", md: "2%", lg: "2%" },
           }}
         >
@@ -155,18 +152,16 @@ const Home = () => {
                 />
               </ListItem>
             </List>
-          </Box>
-          <Box
+            <Box
             sx={{
               display: "flex",
               justifyContent: "right",
-              width: '100%',
-              height:'auto',
+              // height: "auto",
             }}
           >
             <Button
               component={Link}
-              to="/GeneralQuizPage"
+              to="/General-quiz-test"
               variant="contained"
               sx={{
                 fontWeight: "bold",
@@ -190,6 +185,8 @@ const Home = () => {
               Take the Test!
             </Button>
           </Box>
+          </Box>
+        
         </Box>
       </Box>
     </Box>
