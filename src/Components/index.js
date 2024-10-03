@@ -10,6 +10,7 @@ import SidebarContent from "./SidebarContent";
 import SideBarHeader from "./SideBarHeader";
 import LevelDetails from "./LevelDetails";
 import ResultCard from "./ResultCard";
+import AnsKeyArea from "./AnsKeyArea";
 
 export  {
   ForgotPassword,
@@ -23,5 +24,6 @@ export  {
   SidebarContent,
   SideBarHeader,
   LevelDetails,
-  ResultCard
+  ResultCard,
+  AnsKeyArea
 };

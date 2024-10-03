@@ -11,9 +11,9 @@ import {
   ListItemText,
   Button,
   CircularProgress,
+  Zoom,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
-
 import CancelIcon from "@mui/icons-material/Cancel";
 import { useNavigate } from "react-router-dom";
 
@@ -101,7 +101,7 @@ const Item = ({ children, isSelected, onClick }) => {
   );
 };
 
-const QuizPage = ({quizData}) => {
+const QuizPage = ({ quizData }) => {
   const totalTime = quizData.length * 60; // Total time based on the number of questions (60s per question)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
@@ -110,8 +110,10 @@ const QuizPage = ({quizData}) => {
   const [answeredQuestions, setAnsweredQuestions] = useState([]); // Track answers
   const [userAnswers, setUserAnswers] = useState([]); // Track user answers
   const [quizCompleted, setQuizCompleted] = useState(false); // Track if quiz is completed
-  // const [questionStartTime, setQuestionStartTime] = useState(Date.now()); // Track when the question starts
-  // const [showFasterThanBolt, setShowFasterThanBolt] = useState(false); // Show message when answered quickly
+  const [questionStartTime, setQuestionStartTime] = useState(Date.now()); // Track when the question starts
+  const [motivationMessage, setMotivationMessage] = useState(""); // Track motivational message
+  const [animateMessage, setAnimateMessage] = useState(false); // Control animation
+
   const navigate = useNavigate();
   // Timer logic
   useEffect(() => {
@@ -140,7 +142,7 @@ const QuizPage = ({quizData}) => {
     const previousAnswer = newAnswers[currentQuestionIndex]; // Get the previous answer for this question
     newAnswers[currentQuestionIndex] = option;
     setUserAnswers(newAnswers);
-
+  
     // Adjust score based on the previous and new answers
     if (previousAnswer !== option) {
       if (previousAnswer === currentQuestion.correctAnswer) {
@@ -152,24 +154,37 @@ const QuizPage = ({quizData}) => {
         setScore((prevScore) => prevScore + 1);
       }
     }
-
+  
     // Mark the current question as answered
     setAnsweredQuestions((prevAnswered) => [
       ...new Set([...prevAnswered, currentQuestionIndex]),
     ]);
-
+  
     // Calculate time spent on the current question
-    // const timeSpent = (Date.now() - questionStartTime) / 1000; 
-    // if (timeSpent < 10) {
-    //   setShowFasterThanBolt(true); 
-    // } else {
-    //   setShowFasterThanBolt(false);
-    // }
-
-    // Move to next question
+    const timeSpent = (Date.now() - questionStartTime) / 1000;
+  
+    // Show motivational message based on time spent
+    if (timeSpent <= 10) {
+      setMotivationMessage("Nice!! You are faster than Bolt..");
+    } else if (timeSpent <= 30) {
+      setMotivationMessage("Great job! You're moving quickly!");
+    } else {
+      setMotivationMessage("Keep it up! You're doing well.");
+    }
+    
+    // Trigger animation for the message
+    setAnimateMessage(true);
+  
+    // Set a timer to clear the message after 5 seconds
+    setTimeout(() => {
+      setAnimateMessage(false); // Start fade out
+      setTimeout(() => setMotivationMessage(""), 500); // Clear message after fade out
+    }, 5000); // Message shown for 5 seconds
+  
+    // Move to next question logic (unchanged)
     if (currentQuestionIndex < quizData.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
-      // setQuestionStartTime(Date.now()); // Reset the start time for the next question
+      setQuestionStartTime(Date.now()); // Reset the start time for the next question
     }
   };
 
@@ -181,7 +196,8 @@ const QuizPage = ({quizData}) => {
 
   const handleSubmit = () => {
     setQuizCompleted(true);
-    navigate("/gq-success", { replace: true });
+    navigate("/AnsKeyPage", { state: { quizData, userAnswers } });
+    // navigate("/gq-success", { replace: true });
     console.log(`Quiz Completed! Your score: ${score}/${quizData.length}`);
   };
 
@@ -325,22 +341,26 @@ const QuizPage = ({quizData}) => {
               >
                 Quiz {currentQuestionIndex + 1} of {quizData.length}
               </Typography>
-              <Typography
-                align="center"
-                sx={{
-                  bgcolor: "#F7DE83",
-                  px: "15px",
-                  py: "5px",
-                  color: "#02216F",
-                  fontSize: "16px",
-                  fontWeight: "bold",
-                  borderRadius: "20px",
-                  textAlign: "center",
-                  alignItems: "center",
-                }}
-              >
-                Nice!! You are faster than Bolt..
-              </Typography>
+              {motivationMessage && (
+                <Zoom in={animateMessage} timeout={500}>
+                  <Typography
+                    align="center"
+                    sx={{
+                      bgcolor: "#F7DE83",
+                      px: "15px",
+                      py: "5px",
+                      color: "#02216F",
+                      fontSize: "16px",
+                      fontWeight: "bold",
+                      borderRadius: "20px",
+                      textAlign: "center",
+                      alignItems: "center",
+                    }} onAnimationEnd={() => setAnimateMessage(false)}
+                  >
+                    {motivationMessage}
+                  </Typography>
+                </Zoom>
+              )}
 
               <Stack direction={"row"} spacing={2}>
                 <Button

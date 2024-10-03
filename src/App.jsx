@@ -7,7 +7,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import { SignIn, SignUp } from "./pages/AuthPages";
-import { ContestPage, ExplorePage, GeneralQuizPage, GQGetResult, GQGetResultWA, GQSuccessPage, Home, MissionPage,LeaderboardPage, ProfilePage, SupportPage, SettingsPage, QuizResultPage } from "./pages";
+import { ContestPage, ExplorePage, GeneralQuizPage, GQGetResult, GQGetResultWA, GQSuccessPage, Home, MissionPage,LeaderboardPage, ProfilePage, SupportPage, SettingsPage, QuizResultPage, AnsKeyPage } from "./pages";
 import { BlueBg, WhiteBg, YellowBg } from "./assets/Bg";
 import { Box } from "@mui/material";
 
@@ -64,6 +64,7 @@ const App = () => {
           <Route path="/Support" element={<SupportPage/>}></Route>
           <Route path="/Settings" element={<SettingsPage/>}></Route>
           <Route path="/QuizResult" element={<QuizResultPage/>}></Route>
+          <Route path="/AnsKeyPage" element={<AnsKeyPage/>}></Route>
         </Routes>
       </DynamicBackground>
     </BrowserRouter>

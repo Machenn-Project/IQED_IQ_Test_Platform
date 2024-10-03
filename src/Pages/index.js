@@ -11,4 +11,5 @@ export {default as ProfilePage } from './ProfilePage';
 export {default as SupportPage } from './SupportPage';
 export {default as SettingsPage } from './SettingsPage';
 export {default as QuizResultPage } from './QuizResultPage';
+export {default as AnsKeyPage } from './AnsKeyPage';
 

@@ -10,7 +10,7 @@ import {
   IconButton,
   Divider,
 } from "@mui/material";
-import { SuccessMan } from "../assets";
+
 import { ResultCard } from "../components";
 
 const QuizResultPage = () => {
