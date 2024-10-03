@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 function HomeNav() {
   return (
-    <AppBar sx={{ backgroundColor: "transparent", boxShadow: "0", p: "2%",position:'relative'}}>
+    <AppBar sx={{ backgroundColor: "transparent", boxShadow: "0",position:'relative',p:2}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1 }}>
@@ -17,7 +17,7 @@ function HomeNav() {
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Button
-              component={Link}  
+              component={Link}
               to="/Signup"
               fullWidth
               variant="contained"

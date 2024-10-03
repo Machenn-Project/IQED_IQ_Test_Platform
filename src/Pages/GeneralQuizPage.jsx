@@ -2,6 +2,7 @@ import { Box } from '@mui/material'
 import React from 'react'
 import { YellowBg } from '../assets/Bg'
 import { QuizPage } from '../commonComponents'
+import { quizData } from '../utils/schema'
 
 const GeneralQuizPage = () => {
   return (
@@ -14,8 +15,7 @@ const GeneralQuizPage = () => {
         justifyContent: "center",
       }}
     >
-      <QuizPage/>
-      
+      <QuizPage quizData={quizData}/>
     </Box>
   )
 }

@@ -5,4 +5,6 @@ import NeetImage from './NeetImage.jpg'
 import FireIcon from './FireIcon.svg'
 import Coin from './Coin.png'
 import RankIcon from './Rank.png'
-export  {IQEDLogo,Pop,IQEDIcon,NeetImage,FireIcon,Coin,RankIcon};
+import trophy from './trophy.png'
+import SuccessMan from './SuccessMan.svg'
+export  {IQEDLogo,Pop,IQEDIcon,NeetImage,FireIcon,Coin,RankIcon,trophy,SuccessMan};

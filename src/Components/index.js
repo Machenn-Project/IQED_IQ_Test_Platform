@@ -8,6 +8,8 @@ import CompetitiveExam from "./CompetitiveExam";
 import DandFQuests from "./DandFQuests";
 import SidebarContent from "./SidebarContent";
 import SideBarHeader from "./SideBarHeader";
+import LevelDetails from "./LevelDetails";
+import ResultCard from "./ResultCard";
 
 export  {
   ForgotPassword,
@@ -19,5 +21,7 @@ export  {
   CompetitiveExam,
   DandFQuests,
   SidebarContent,
-  SideBarHeader
+  SideBarHeader,
+  LevelDetails,
+  ResultCard
 };

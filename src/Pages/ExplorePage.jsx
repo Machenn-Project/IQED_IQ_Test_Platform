@@ -53,7 +53,6 @@ const ExplorePage = () => {
         >
           {/* Competitive exam and quests sections */}
           <CompetitiveExam />
-
           <DandFQuests />
         </Box>
       </Box>

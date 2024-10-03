@@ -22,6 +22,8 @@ const MainNavBar = ({ selectedPage }) => {
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
   const navigate = useNavigate(); // Initialize navigate
 
+
+  
   const navItems = [
     { label: "Explore", icon: <ExtensionIcon />, path: "/Explore" },
     { label: "Mission", icon: <FlagCircleIcon />, path: "/Missions" },
@@ -91,6 +93,9 @@ const MainNavBar = ({ selectedPage }) => {
         flexDirection: isSm ? "row" : "column",
         gap: isSm ? "null" : "20px",
         alignItems: isMd ? "center" : null,
+        position:isSm?'fixed':null,
+        bottom:isSm?0:null,
+        zIndex:isSm?999:null,
       }}
     >
       {isSm ? null : isMd ? (

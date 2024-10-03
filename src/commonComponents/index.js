@@ -8,4 +8,7 @@ export {default as MainNavBar  } from './MainNavBar';
 export {default as ExamCard  } from './ExamCard';
 export {default as QuestCard  } from './QuestCard';
 export {default as StatsCard  } from './StatsCard';
-export {default as Levelcard  } from './Levelcard';
+export {default as BreadcrumbsNav  } from './BreadcrumbsNav';
+export { default as LevelTagCard} from './LevelTagcard';
+export { default as levelcard } from './LevelCard';
+export { default as RewardCard } from './RewardCard';

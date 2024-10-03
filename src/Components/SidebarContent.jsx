@@ -10,7 +10,7 @@ import {
 import React from "react";
 import SideBarHeader from "./SideBarHeader";
 import { Coin, FireIcon, RankIcon } from "../assets";
-import { Levelcard, StatsCard } from "../commonComponents";
+import { LevelTagCard, StatsCard } from "../commonComponents";
 import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
 
 const SidebarContent = () => {
@@ -116,7 +116,7 @@ const SidebarContent = () => {
       >
         <StatsCard title={"IQ Gems"} CoinCount={2500} icon={Coin} />
         <StatsCard title={"Rank"} CoinCount={20} icon={RankIcon} />
-        <Levelcard
+        <LevelTagCard
           Level={1}
           goal={20}
           progress={3}

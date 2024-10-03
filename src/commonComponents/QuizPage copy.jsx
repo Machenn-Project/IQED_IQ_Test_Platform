@@ -13,7 +13,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
-import { quizData } from "../utils/schema";
+
 import CancelIcon from "@mui/icons-material/Cancel";
 import { useNavigate } from "react-router-dom";
 
@@ -63,8 +63,7 @@ const CircularTimer = ({ timeLeft, totalTime }) => {
           {Math.floor(timeLeft / 60)
             .toString()
             .padStart(2, "0")}
-          :
-          {(timeLeft % 60).toString().padStart(2, "0")}
+          :{(timeLeft % 60).toString().padStart(2, "0")}
         </Typography>
         {/* Total Time (Static) */}
         <Typography variant="body2" sx={{ color: "white", mt: 1 }}>
@@ -102,7 +101,7 @@ const Item = ({ children, isSelected, onClick }) => {
   );
 };
 
-const QuizPage = () => {
+const QuizPage = ({quizData}) => {
   const totalTime = quizData.length * 60; // Total time based on the number of questions (60s per question)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
@@ -111,10 +110,9 @@ const QuizPage = () => {
   const [answeredQuestions, setAnsweredQuestions] = useState([]); // Track answers
   const [userAnswers, setUserAnswers] = useState([]); // Track user answers
   const [quizCompleted, setQuizCompleted] = useState(false); // Track if quiz is completed
-  const [questionStartTime, setQuestionStartTime] = useState(Date.now()); // Track when the question starts
-  const [showFasterThanBolt, setShowFasterThanBolt] = useState(false); // Show message when answered quickly
+  // const [questionStartTime, setQuestionStartTime] = useState(Date.now()); // Track when the question starts
+  // const [showFasterThanBolt, setShowFasterThanBolt] = useState(false); // Show message when answered quickly
   const navigate = useNavigate();
-
   // Timer logic
   useEffect(() => {
     const timer = setInterval(() => {
@@ -127,6 +125,14 @@ const QuizPage = () => {
     }, 1000);
     return () => clearInterval(timer);
   }, [quizCompleted]);
+
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const sec = seconds % 60;
+    return `${minutes.toString().padStart(2, "0")}:${sec
+      .toString()
+      .padStart(2, "0")}`;
+  };
 
   const handleOptionSelect = (option) => {
     const currentQuestion = quizData[currentQuestionIndex];
@@ -153,17 +159,17 @@ const QuizPage = () => {
     ]);
 
     // Calculate time spent on the current question
-    const timeSpent = (Date.now() - questionStartTime) / 1000; // Convert to seconds
-    if (timeSpent < 10) {
-      setShowFasterThanBolt(true); // Show the message if answered quickly
-    } else {
-      setShowFasterThanBolt(false);
-    }
+    // const timeSpent = (Date.now() - questionStartTime) / 1000; 
+    // if (timeSpent < 10) {
+    //   setShowFasterThanBolt(true); 
+    // } else {
+    //   setShowFasterThanBolt(false);
+    // }
 
     // Move to next question
     if (currentQuestionIndex < quizData.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
-      setQuestionStartTime(Date.now()); // Reset the start time for the next question
+      // setQuestionStartTime(Date.now()); // Reset the start time for the next question
     }
   };
 
@@ -182,7 +188,7 @@ const QuizPage = () => {
   const handleQuizListClick = (index) => {
     setCurrentQuestionIndex(index);
     setSelectedOption(userAnswers[index] || null); // Show the previously selected option
-    setQuestionStartTime(Date.now()); // Reset the start time for the clicked question
+    // setQuestionStartTime(Date.now()); // Reset the start time for the clicked question
   };
 
   const currentQuestion = quizData[currentQuestionIndex];
@@ -192,7 +198,7 @@ const QuizPage = () => {
       sx={{
         width: { xs: "calc(100vw - 30px)", md: "calc(100vw - 80px)" },
         height: { xs: "calc(100vh - 30px)", md: "calc(100vh - 80px)" },
-        padding: "10px",
+        // padding: "10px",
       }}
     >
       <Stack
@@ -257,22 +263,32 @@ const QuizPage = () => {
                       : index === currentQuestionIndex
                       ? "#FFEDAC"
                       : "#c5c5c5",
-                    color: "#02216F",
-                    fontWeight: "bold",
-                    m: "5%",
+                    border: answeredQuestions.includes(index)
+                      ? "1px solid #1DC77B"
+                      : index === currentQuestionIndex
+                      ? "1px solid #FFDA55"
+                      : "",
                     borderRadius: "10px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
+                    mt: "2%",
+                    "&:hover": {
+                      bgcolor:
+                        index === currentQuestionIndex ? "#FFEDAC" : "#e0e0e0",
+                      cursor: "pointer",
+                    },
                   }}
-                  onClick={() => handleQuizListClick(index)}
+                  onClick={() => handleQuizListClick(index)} // Allow navigation by clicking on the quiz item
                 >
                   <ListItemText
-                    primary={`Question ${index + 1}`}
-                    sx={{
-                      textAlign: "center",
-                      fontWeight: index === currentQuestionIndex ? "bold" : "normal",
-                    }}
+                    primary={
+                      <Typography variant="body1" fontWeight="bold">
+                        {`Quiz ${index + 1}`}
+                      </Typography>
+                    }
+                    secondary={
+                      <Typography variant="body2" fontWeight="400">
+                        {quiz.question}
+                      </Typography>
+                    }
                   />
                 </ListItem>
               ))}
@@ -280,115 +296,122 @@ const QuizPage = () => {
           </Box>
         </Stack>
 
-        {/* Main Panel */}
+        {/* Quiz Area */}
         <Box
           sx={{
             width: { xs: "100%", md: "75%" },
+            bgcolor: "white",
             height: "100%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            bgcolor: "#FFDA55",
             borderRadius: "20px",
             boxShadow: "5px 6px #02216F",
-            padding: "20px",
+            border: "1px solid",
+            borderColor: "#02216F",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          <Box>
-            <Stack
-              direction="row"
-              justifyContent="space-between"
-              alignItems="center"
-              mb={2}
-            >
-              <Typography variant="h6" color="#02216F">
-                {currentQuestion.question}
-              </Typography>
-              <IconButton onClick={() => navigate("/iq-challenges")} color="error">
-                <CancelIcon />
-              </IconButton>
-            </Stack>
-            <Divider sx={{ borderBottomWidth: 5, borderColor: "#02216F" }} />
-            <Grid container spacing={2} mt={2}>
-              {currentQuestion.options.map((option, index) => (
-                <Grid key={index} item xs={6}>
-                  <Item
-                    onClick={() => handleOptionSelect(option)}
-                    isSelected={userAnswers[currentQuestionIndex] === option}
-                  >
-                    {option}
-                  </Item>
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
-
-          {showFasterThanBolt && (
-            <Typography
-              variant="h6"
+          <Box sx={{ width: "98%", height: "98%" }}>
+            <Box
               sx={{
-                mt: 3,
-                color: "#02216F",
-                textAlign: "center",
-                fontWeight: "bold",
+                m: "10px",
+                display: "flex",
+                justifyContent: "space-between",
+                height: "5%",
               }}
             >
-              Nice, you're faster than Bolt!
-            </Typography>
-          )}
-
-          <Box>
-            <Divider sx={{ borderBottomWidth: 5, borderColor: "#02216F" }} />
-
-            <Stack direction="row" justifyContent="space-between" mt={2}>
-              <Button
-                variant="contained"
-                sx={{
-                  bgcolor: "#02216F",
-                  color: "white",
-                  "&:hover": {
-                    bgcolor: "#02184F",
-                  },
-                }}
-                disabled={currentQuestionIndex === 0}
-                onClick={() =>
-                  setCurrentQuestionIndex((prevIndex) => prevIndex - 1)
-                }
+              <Typography
+                sx={{ fontSize: "16px", fontWeight: "600", color: "#02216F" }}
               >
-                Previous
-              </Button>
-              {currentQuestionIndex === quizData.length - 1 ? (
+                Quiz {currentQuestionIndex + 1} of {quizData.length}
+              </Typography>
+              <Typography
+                align="center"
+                sx={{
+                  bgcolor: "#F7DE83",
+                  px: "15px",
+                  py: "5px",
+                  color: "#02216F",
+                  fontSize: "16px",
+                  fontWeight: "bold",
+                  borderRadius: "20px",
+                  textAlign: "center",
+                  alignItems: "center",
+                }}
+              >
+                Nice!! You are faster than Bolt..
+              </Typography>
+
+              <Stack direction={"row"} spacing={2}>
                 <Button
+                  fullWidth
                   variant="contained"
+                  onClick={handleSubmit}
                   sx={{
-                    bgcolor: "#02216F",
-                    color: "white",
+                    fontWeight: "bold",
+                    backgroundColor: "#ffff",
+                    color: "#02216F",
+                    boxShadow: "2px 3px #02216F",
+                    borderRadius: {
+                      xs: "5px",
+                      sm: "5px",
+                      md: "10px",
+                      lg: "10px",
+                    },
+                    textTransform: "none",
+                    border: "1px solid",
+                    borderColor: "#02216F",
                     "&:hover": {
-                      bgcolor: "#02184F",
+                      color: "#ffff",
+                      backgroundColor: "#02216F",
+                      transition: "transform 0.3s ease-in-out",
+                      transform: "translateY(-5px)",
+                      boxShadow: "2px 3px #ffff",
                     },
                   }}
-                  onClick={handleSubmit}
                 >
                   Submit
                 </Button>
-              ) : (
-                <Button
-                  variant="contained"
-                  sx={{
-                    bgcolor: "#02216F",
-                    color: "white",
-                    "&:hover": {
-                      bgcolor: "#02184F",
-                    },
-                  }}
-                  disabled={!answeredQuestions.includes(currentQuestionIndex)}
-                  onClick={() =>
-                    setCurrentQuestionIndex((prevIndex) => prevIndex + 1)
-                  }
-                >
-                  Next
-                </Button>
-              )}
+
+                <IconButton aria-label="Exit" sx={{ color: "#02216F" }}>
+                  <CancelIcon />
+                </IconButton>
+              </Stack>
+            </Box>
+
+            <Divider sx={{ bgcolor: "#FFDA55", mb: "3%", height: "2px" }} />
+
+            <Stack sx={{ alignItems: "center", width: "100%", height: "85%" }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  bgcolor: "#1A49BA",
+                  color: "white",
+                  width: "98%",
+                  height: "75%",
+                  borderRadius: "4px",
+                }}
+              >
+                <Typography variant="h6" fontWeight={"600"}>
+                  {currentQuestion.question}
+                </Typography>
+              </Box>
+              <Box sx={{ width: "98%", mt: "10px" }}>
+                <Grid container rowSpacing={1} columnSpacing={1}>
+                  {currentQuestion.options.map((option, index) => (
+                    <Grid item xs={6} key={index}>
+                      <Item
+                        onClick={() => handleOptionSelect(option)}
+                        isSelected={selectedOption === option}
+                      >
+                        {option}
+                      </Item>
+                    </Grid>
+                  ))}
+                </Grid>
+              </Box>
             </Stack>
           </Box>
         </Box>

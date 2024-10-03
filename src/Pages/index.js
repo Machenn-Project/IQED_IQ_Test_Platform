@@ -10,4 +10,5 @@ export {default as LeaderboardPage } from './LeaderboardPage';
 export {default as ProfilePage } from './ProfilePage';
 export {default as SupportPage } from './SupportPage';
 export {default as SettingsPage } from './SettingsPage';
+export {default as QuizResultPage } from './QuizResultPage';
 

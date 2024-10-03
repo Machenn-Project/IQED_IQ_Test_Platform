@@ -7,35 +7,37 @@ import {
   ListItemText,
   Button,
 } from "@mui/material";
-import React from "react";
-import { YellowBg } from "../assets/Bg";
 import { HomeNav } from "../components";
 
 import { Link } from "react-router-dom";
 
+const CustomListItem = ({ content }) => (
+  <ListItem sx={{ display: "list-item" }} disablePadding>
+    <ListItemText
+      primary={content}
+      primaryTypographyProps={{
+        fontSize: {
+          xs: "14px",
+          sm: "14px",
+          md: "20px",
+          lg: "20px",
+        },
+        fontWeight: "600",
+      }}
+    />
+  </ListItem>
+);
 const Home = () => {
   return (
-    <Box
-    // sx={{
-    //   display: "flex",
-    //   flexDirection: "column",
-    // }}
-    >
+    <>
+    
       <HomeNav />
 
       <Box
-        sx={{
-          width: "100%",
-          position: "relative",
-          height: "100%",
-          // backgroundColor: "black",
-          // height: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          // pt: "2vh",
-          justifyContent: "center",
-        }}
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        flexDirection={"column"}
       >
         <Typography
           align="center"
@@ -55,6 +57,8 @@ const Home = () => {
         <Typography
           sx={{
             textAlign: "center",
+            px: "15px",
+            py: "5px",
             color: "#02216F",
             fontSize: { xs: "40px", sm: "40px", md: "48px", lg: "60px" },
             fontWeight: "bold",
@@ -67,11 +71,11 @@ const Home = () => {
         <Box
           sx={{
             bgcolor: "#02216F",
-            width: { xs: "80%", sm: "80%", md: {minWidth:"55%"}, lg: "55%" },
-           
+            width: { xs: "80%", sm: "80%", md: "55%", lg: "55%" },
+            
             borderRadius: "20px",
-            // m: "20px",
-            p: { xs: "20px", sm: "1%", md: "2%", lg: "2%" },
+            m: "20px",
+            padding: "20px",
           }}
         >
           <Typography
@@ -91,21 +95,7 @@ const Home = () => {
             }}
           >
             <List sx={{ listStyleType: "disc", fontSize: "20px" }}>
-              <ListItem sx={{ display: "list-item" }} disablePadding>
-                <ListItemText
-                  primary="There are 30 multiple choice questions."
-                  primaryTypographyProps={{
-                    fontSize: {
-                      xs: "14px",
-                      sm: "14px",
-                      md: "20px",
-                      lg: "20px",
-                    },
-                    fontWeight: "600",
-                    pb: "2%",
-                  }}
-                />
-              </ListItem>
+              <CustomListItem content={"There are 30 multiple choice questions."}/>
               <ListItem sx={{ display: "list-item" }} disablePadding>
                 <ListItemText
                   primary="Approximate test time: Fifteen minutes."
@@ -117,7 +107,6 @@ const Home = () => {
                       lg: "20px",
                     },
                     fontWeight: "600",
-                    pb: "2%",
                   }}
                 />
               </ListItem>
@@ -132,7 +121,6 @@ const Home = () => {
                       lg: "20px",
                     },
                     fontWeight: "600",
-                    pb: "2%",
                   }}
                 />
               </ListItem>
@@ -147,21 +135,22 @@ const Home = () => {
                       lg: "20px",
                     },
                     fontWeight: "600",
-                    pb: "2%",
                   }}
                 />
               </ListItem>
             </List>
-            <Box
+          </Box>
+          <Box
             sx={{
               display: "flex",
               justifyContent: "right",
-              // height: "auto",
+              width: "100%",
+              height: "100%",
             }}
           >
             <Button
               component={Link}
-              to="/General-quiz-test"
+              to="/general-quiz-test"
               variant="contained"
               sx={{
                 fontWeight: "bold",
@@ -185,11 +174,9 @@ const Home = () => {
               Take the Test!
             </Button>
           </Box>
-          </Box>
-        
         </Box>
       </Box>
-    </Box>
+    </>
   );
 };
 

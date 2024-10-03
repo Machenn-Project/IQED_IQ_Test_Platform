@@ -7,7 +7,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import { SignIn, SignUp } from "./pages/AuthPages";
-import { ContestPage, ExplorePage, GeneralQuizPage, GQGetResult, GQGetResultWA, GQSuccessPage, Home, MissionPage,LeaderboardPage, ProfilePage, SupportPage, SettingsPage } from "./pages";
+import { ContestPage, ExplorePage, GeneralQuizPage, GQGetResult, GQGetResultWA, GQSuccessPage, Home, MissionPage,LeaderboardPage, ProfilePage, SupportPage, SettingsPage, QuizResultPage } from "./pages";
 import { BlueBg, WhiteBg, YellowBg } from "./assets/Bg";
 import { Box } from "@mui/material";
 
@@ -34,8 +34,9 @@ const DynamicBackground = ({ children }) => {
       sx={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
-        height: "100vh",
-        width: "100vw",
+        backgroundPosition:'center',
+        backgroundRepeat:'no-repeat',      
+        height:'100vh',
       }}
     >
       {children}
@@ -62,6 +63,7 @@ const App = () => {
           <Route path="/Profile" element={<ProfilePage/>}></Route>
           <Route path="/Support" element={<SupportPage/>}></Route>
           <Route path="/Settings" element={<SettingsPage/>}></Route>
+          <Route path="/QuizResult" element={<QuizResultPage/>}></Route>
         </Routes>
       </DynamicBackground>
     </BrowserRouter>
