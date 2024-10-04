@@ -1,10 +1,14 @@
 import { Box } from '@mui/material'
 import React from 'react'
-import { YellowBg } from '../assets/Bg'
+
 import { QuizPage } from '../commonComponents'
-import { quizData } from '../utils/schema'
+
+import { getRandomQuestions } from '../utils/Randam'
+import { IQData } from '../utils/schema/QuizData'
 
 const GeneralQuizPage = () => {
+
+  const GeneralTestData= getRandomQuestions(IQData,5);
   return (
     <Box
       sx={{
@@ -15,7 +19,7 @@ const GeneralQuizPage = () => {
         justifyContent: "center",
       }}
     >
-      <QuizPage quizData={quizData}/>
+      <QuizPage quizData={GeneralTestData} isGeneral = {true}  />
     </Box>
   )
 }

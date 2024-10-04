@@ -7,7 +7,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import { SignIn, SignUp } from "./pages/AuthPages";
-import { ContestPage, ExplorePage, GeneralQuizPage, GQGetResult, GQGetResultWA, GQSuccessPage, Home, MissionPage,LeaderboardPage, ProfilePage, SupportPage, SettingsPage, QuizResultPage, AnsKeyPage } from "./pages";
+import { ContestPage, ExplorePage, GeneralQuizPage, GQGetResult, GQGetResultWA, GQSuccessPage, Home, MissionPage,LeaderboardPage, ProfilePage, SupportPage, SettingsPage, QuizResultPage, AnsKeyPage, CommenQuizTest } from "./pages";
 import { BlueBg, WhiteBg, YellowBg } from "./assets/Bg";
 import { Box } from "@mui/material";
 
@@ -24,9 +24,9 @@ const DynamicBackground = ({ children }) => {
     "/gq-success": YellowBg,
     "/gq-get-result": YellowBg,
     "/gq-get-result-vai-wa": YellowBg,
+    "/commenquiztest": YellowBg,
   };
 
-  // Get the background image based on the current route, default to YellowBg
   const backgroundImage = backgroundMap[location.pathname.toLowerCase()] || WhiteBg;
 
   return (
@@ -65,6 +65,7 @@ const App = () => {
           <Route path="/Settings" element={<SettingsPage/>}></Route>
           <Route path="/QuizResult" element={<QuizResultPage/>}></Route>
           <Route path="/AnsKeyPage" element={<AnsKeyPage/>}></Route>
+          <Route path="/CommenQuizTest" element={<CommenQuizTest/>}></Route>
         </Routes>
       </DynamicBackground>
     </BrowserRouter>

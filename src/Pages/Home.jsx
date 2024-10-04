@@ -39,7 +39,7 @@ const Home = () => {
         alignItems={"center"}
         flexDirection={"column"}
       >
-        <Typography
+        {/* <Typography
           align="center"
           sx={{
             bgcolor: "#F7DE83",
@@ -52,7 +52,7 @@ const Home = () => {
           }}
         >
           General Test
-        </Typography>
+        </Typography> */}
 
         <Typography
           sx={{

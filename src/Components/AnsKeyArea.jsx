@@ -8,7 +8,7 @@ import {
   useTheme,
 } from "@mui/material";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 // Item component to handle individual quiz option styles
 const Item = ({ children, isCorrect, isSelected, isAnswer }) => {
@@ -41,19 +41,14 @@ const Item = ({ children, isCorrect, isSelected, isAnswer }) => {
 };
 
 // Main Answer Key Area component
-const AnsKeyArea = ({ quizData, userAnswers }) => {
+const AnsKeyArea = ({ quizData, userAnswers, Score }) => {
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
   const navigate = useNavigate();
 
-  // Define correctAnswers array from quizData
   const correctAnswers = quizData.map((quiz) => quiz.correctAnswer);
 
-  // Count answered questions and correct answers
   const answeredQuestions = userAnswers.filter((ans) => ans !== undefined);
-  const correctCount = userAnswers.filter(
-    (ans, index) => ans === correctAnswers[index]
-  ).length;
 
   return (
     <Box
@@ -127,6 +122,8 @@ const AnsKeyArea = ({ quizData, userAnswers }) => {
               Retake
             </Button>
             <Button
+              component={Link}
+              to="/Missions"
               variant="contained"
               fullWidth
               sx={{
@@ -175,7 +172,8 @@ const AnsKeyArea = ({ quizData, userAnswers }) => {
               fontWeight: "Bold",
             }}
           >
-            You have answered {correctCount} out of {quizData.length} quizzes correctly.
+            You have answered {Score} out of {quizData.length} quizzes
+            correctly.
           </Typography>
 
           <Box
@@ -205,11 +203,12 @@ const AnsKeyArea = ({ quizData, userAnswers }) => {
                     mb: "20px",
                     p: "10px",
                     border: "2px solid",
-                    borderColor: userAnswers[index] !== undefined
-                      ? isCorrect
-                        ? "#BFFFE2" // Correct answer border
-                        : "#FFD3D3" // Incorrect answer border
-                      : "#ADA3A3", // Not answered
+                    borderColor:
+                      userAnswers[index] !== undefined
+                        ? isCorrect
+                          ? "#BFFFE2" // Correct answer border
+                          : "#FFD3D3" // Incorrect answer border
+                        : "#ADA3A3", // Not answered
                     borderRadius: "10px",
                     boxSizing: "border-box",
                     gap: "20px",
@@ -220,11 +219,12 @@ const AnsKeyArea = ({ quizData, userAnswers }) => {
                       boxSizing: "border-box",
                       p: "10px",
                       borderRadius: "10px",
-                      bgcolor: userAnswers[index] !== undefined
-                        ? isCorrect
-                          ? "#BFFFE2" // Correctly answered background
-                          : "#FFD3D3" // Incorrectly answered background
-                        : "#ADA3A3", // Default background if not answered
+                      bgcolor:
+                        userAnswers[index] !== undefined
+                          ? isCorrect
+                            ? "#BFFFE2" // Correctly answered background
+                            : "#FFD3D3" // Incorrectly answered background
+                          : "#ADA3A3", // Default background if not answered
                     }}
                   >
                     <Typography
@@ -247,7 +247,10 @@ const AnsKeyArea = ({ quizData, userAnswers }) => {
                         <Item
                           isSelected={userAnswers[index] === option} // Compare value directly
                           isCorrect={correctAnswers[index] === option} // Compare value directly
-                          isAnswer={correctAnswers[index] === option && userAnswers[index] !== option}
+                          isAnswer={
+                            correctAnswers[index] === option &&
+                            userAnswers[index] !== option
+                          }
                         >
                           {option}
                         </Item>

@@ -5,7 +5,7 @@ import { LevelDetails, SidebarContent } from "../components";
 import { BreadcrumbsNav } from "../commonComponents";
 import LevelCard from "../commonComponents/LevelCard";
 import { trophy } from "../assets";
-
+import { useLocation } from "react-router-dom";
 // Mock data for levels
 const levels = [
   { level: 1, total: 10, progress: 5, image: trophy },
@@ -15,12 +15,14 @@ const levels = [
   { level: 5, total: 10, progress: 2, image: trophy },
 ];
 
-const MissionPage = () => {
+const MissionPage = ( ) => {
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
-
-  // State to track the selected level
-  const [selectedLevel, setSelectedLevel] = useState(null);
+  const location = useLocation();
+  const { state } = location;
+  const inLevel = state ? state.inLevel : undefined;
+  const currentLevel = inLevel ? inLevel.level : undefined;
+  const [selectedLevel, setSelectedLevel] = useState(currentLevel);
 
   // Breadcrumb paths
   const breadcrumbPath = selectedLevel

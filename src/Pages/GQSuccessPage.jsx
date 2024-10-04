@@ -7,7 +7,11 @@ import { Pop } from "../assets";
 import { Link } from "react-router-dom";
 import EmailIcon from "@mui/icons-material/Email";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import { useLocation } from "react-router-dom";
 const GQSuccessPage = () => {
+  const location = useLocation();
+  const {Score,totalTimeTaken} = location.state; 
+  console.log(Score ,totalTimeTaken);
   return (
     <Box
       sx={{
@@ -47,7 +51,7 @@ const GQSuccessPage = () => {
             borderRadius: "20px",
           }}
         >
-          General Test Completed
+          General Test Completed 
         </Typography>
 
         <Typography

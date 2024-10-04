@@ -4,10 +4,13 @@ import App from './App.jsx'
 import './index.css'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-
+import { store } from './Redux/Store.js'
+import { Provider } from 'react-redux'
+ 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </StrictMode>,
 )

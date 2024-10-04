@@ -9,7 +9,7 @@ import { useLocation } from "react-router-dom";
 
 const AnsKeyPage = () => {
   const location = useLocation();
-  const { quizData, userAnswers } = location.state; // Match the state names
+  const { quizData, userAnswers, Score } = location.state; 
 
   return (
     <Box
@@ -23,7 +23,7 @@ const AnsKeyPage = () => {
         boxSizing: "border-box",
       }}
     >
-      <AnsKeyArea quizData={quizData} userAnswers={userAnswers} />
+      <AnsKeyArea quizData={quizData} userAnswers={userAnswers}  Score={Score} />
     </Box>
   );
 };

@@ -12,8 +12,10 @@ import {
 } from "@mui/material";
 
 import { ResultCard } from "../components";
-
+import { useLocation } from "react-router-dom";
 const QuizResultPage = () => {
+  const location = useLocation();
+  const {quizData, userAnswers, totalTimeTaken, Score,Level} = location.state; 
   return (
     <Box
       sx={{
@@ -26,7 +28,7 @@ const QuizResultPage = () => {
         boxSizing: "border-box",
       }}
     >
-      <ResultCard/>
+      <ResultCard Score={Score} quizData={quizData} totalTimeTaken={totalTimeTaken} userAnswers={userAnswers} Level={Level} />
     </Box>  
   );
 };

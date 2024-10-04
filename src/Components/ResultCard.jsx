@@ -10,16 +10,30 @@ import {
 } from "@mui/material";
 import { SuccessMan } from "../assets";
 import { RewardCard } from "../commonComponents";
-
-const ResultCard = () => {
+import {useNavigate } from "react-router-dom";
+const ResultCard = ({quizData, userAnswers, totalTimeTaken, Score ,Level}) => {
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.down("md"));
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
+  const inLevel=Level
+  const navigate = useNavigate();
   const cardData = [
-    { title: "Answered", leftText: "18/20", coinValue: "20" },
-    { title: "Time Taken", leftText: "00:18:08", coinValue: "20" },
-    { title: "Total Coins Earned", coinValue: "40" },
+    { title: "Answered", leftText: `${Score}/${quizData.length}`, coinValue: `${Score*2}` },
+    { title: "Time Taken", leftText: `${Math.floor(totalTimeTaken / 60)} : ${totalTimeTaken % 60}`, coinValue: `${Score*2}` },
+    { title: "Total Coins Earned", coinValue: `${Score*4}` },
   ];
+  const handleReview= () =>{
+    navigate("/AnsKeyPage", {
+      state: { quizData, userAnswers, Score }
+    })
+  }
+  const handleDone= () =>{
+    navigate("/Missions", {
+      state: {inLevel}
+    })
+    console.log(inLevel)
+  }
+  
   return (
     <Box
       sx={{
@@ -128,6 +142,7 @@ const ResultCard = () => {
           <Button
             variant="contained"
             fullWidth
+            onClick={() => handleReview()}
             sx={{
               fontWeight: "bold",
               backgroundColor: "#FFDA55",
@@ -174,6 +189,7 @@ const ResultCard = () => {
           <Button
             variant="contained"
             fullWidth
+            onClick={() => handleDone()}
             sx={{
               fontWeight: "bold",
               backgroundColor: "#FFDA55",

@@ -12,12 +12,17 @@ import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { formSchema } from "../utils/schema";
 import {DomLink} from '../components'
+import { useSignInMutation } from '../Redux/Auth/AuthReducer';
+import { useNavigate } from 'react-router-dom';
 
 const CustomFormHelperText = styled('p')({
   fontSize: '10px',
 }); 
 
 export default function SignInCard() {
+  
+  const navigator = useNavigate(); 
+  const [UserLogin, {isSuccess}] = useSignInMutation()
   const formMethods = useForm({
     resolver: yupResolver(formSchema),
   });
@@ -58,10 +63,17 @@ export default function SignInCard() {
     return isValid;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (validateInputs()) {
       const data = new FormData(event.currentTarget);
+      try {
+        const response = await UserLogin({Email:data.get('email') , Password:data.get('password')}).unwrap();
+        sessionStorage.setItem("Token",response)
+        navigator("/Explore");
+      } catch (error) {
+        console.error("Signup failed:", error);
+      }
       console.log({
         email: data.get('email'),
         password: data.get('password'),
