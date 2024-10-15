@@ -18,7 +18,7 @@ function HomeNav() {
           <Box sx={{ flexGrow: 0 }}>
             <Button
               component={Link}
-              to="/Signup"
+              to="/Signin"
               fullWidth
               variant="contained"
               sx={{
@@ -41,7 +41,7 @@ function HomeNav() {
                 },
               }}
             >
-              SignUp
+              Sign In
             </Button>
           </Box>
         </Toolbar>

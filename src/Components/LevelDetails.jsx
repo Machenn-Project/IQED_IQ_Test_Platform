@@ -8,10 +8,13 @@ import {
   Typography,
   Box,
   StepConnector,
+  Grid,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 
-// Styled components (Same as your existing code)
+// Styled components
 const StepCircle = styled("div")(({ theme, completed }) => ({
   width: "40px",
   height: "40px",
@@ -26,7 +29,7 @@ const StepCircle = styled("div")(({ theme, completed }) => ({
   color: "#02216F",
   boxShadow: "2px 2px #02216F",
   fontFamily: "Suranna",
-  cursor:'pointer',
+  cursor: "pointer",
 }));
 
 const StepIconRoot = styled("div")(({ theme }) => ({
@@ -67,11 +70,52 @@ const DaTa = [
   {
     title: "Numbers",
     steps: [
-      { label: "Number line", number: 1 },
-      { label: "Types of numbers", number: 2 },
-      { label: "Prime numbers", number: 3 },
-      { label: "Tally system", number: 4 },
-      { label: "Co-prime", number: 5 },
+      { label: "Number line" },
+      { label: "Types of numbers" },
+      { label: "Prime numbers" },
+      { label: "Tally system" },
+      { label: "Co-prime" },
+      { label: "Fractions" },
+      { label: "Decimals" },
+      { label: "Percentages" },
+      { label: "Ratios" },
+      { label: "Integers" },
+      { label: "Exponents" },
+      { label: "Square roots" },
+    ],
+  },
+  {
+    title: "Numbers1",
+    steps: [
+      { label: "Number line" },
+      { label: "Types of numbers" },
+      { label: "Prime numbers" },
+      { label: "Tally system" },
+      { label: "Co-prime" },
+      { label: "Fractions" },
+      { label: "Decimals" },
+      { label: "Percentages" },
+      { label: "Ratios" },
+      { label: "Integers" },
+      { label: "Exponents" },
+      { label: "Square roots" },
+    ],
+  },
+  {
+    title: "Numbers2",
+    steps: [
+      { label: "Number line" },
+      { label: "Types of numbers" },
+      { label: "Prime numbers" },
+      { label: "Tally system" },
+      { label: "Co-prime" },
+      { label: "Fractions" },
+      { label: "Decimals" },
+      { label: "Percentages" },
+      { label: "Ratios" },
+      { label: "Integers" },
+      { label: "Exponents" },
+      { label: "Square roots" },
     ],
   },
 ];
@@ -81,6 +125,9 @@ export default function LevelDetails(Level) {
   const [completedSteps, setCompletedSteps] = useState(new Set([]));
   const location = useLocation();
   const navigate = useNavigate();
+  const theme = useTheme();
+  const isMd = useMediaQuery(theme.breakpoints.down("md"));
+  const isSm = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
     const state = location.state;
@@ -93,20 +140,35 @@ export default function LevelDetails(Level) {
   }, [location.state]);
 
   const handleStepClick = (stepIndex) => {
-    // Check if the previous step is completed before allowing selection
-    const isPreviousStepCompleted =
-      stepIndex === 0 || completedSteps.has(stepIndex - 1);
-
-    if (isPreviousStepCompleted) {
-      setActiveStep(stepIndex);
-      navigate("/CommenQuizTest", { state: { stepIndex,Level } });
-    }
+    setActiveStep(stepIndex);
+    navigate("/CommenQuizTest", { state: { stepIndex, Level } });
   };
+
+  // Function to arrange steps into rows
+  const arrangeSteps = (steps, stepsPerRow) => {
+    const rows = [];
+    for (let i = 0; i < steps.length; i += stepsPerRow) {
+      const currentRow = steps.slice(i, i + stepsPerRow);
+      // Check if the row index is even or odd
+      if (Math.floor(i / stepsPerRow) % 2 === 0) {
+        // Even index row - normal order
+        rows.push(currentRow);
+      } else {
+        // Odd index row - reverse order
+        rows.push(currentRow.reverse());
+      }
+    }
+    return rows;
+  };
+
+  
+  const stepsPerRow = isSm?3:5; 
+  const stepRows = arrangeSteps(DaTa[0].steps, stepsPerRow);
 
   return (
     <div>
       {DaTa.map((section, index) => (
-        <Box key={index} p={4}>
+        <Box key={index} p={isSm?0:4}>
           <Box
             sx={{
               textAlign: index % 2 === 0 ? "left" : "right",
@@ -130,40 +192,59 @@ export default function LevelDetails(Level) {
               {section.title}
             </Typography>
           </Box>
-          <Stepper
-            alternativeLabel
-            activeStep={activeStep}
-            connector={<CustomConnector />}
-          >
-            {section.steps.map((step) => (
-              <Step
-                key={step.label}
-                completed={completedSteps.has(step.number - 1)} // Mark step as completed
-              >
-                <StepLabel
-                  StepIconComponent={(props) => (
-                    <StepIcon
-                      {...props}
-                      completed={completedSteps.has(step.number - 1)}
-                    />
-                  )}
-                  icon={step.number}
-                  onClick={() => handleStepClick(step.number - 1)}
-                  
+          <Grid container spacing={10}>
+            {stepRows.map((row, rowIndex) => (
+              <Grid item xs={12} key={rowIndex}>
+                <Stepper
+                  alternativeLabel
+                  activeStep={activeStep}
+                  connector={<CustomConnector />}
                 >
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontWeight: "bold",
-                      color: "#02216F",
-                    }}
-                  >
-                    {step.label}
-                  </Typography>
-                </StepLabel>
-              </Step>
+                  {row.map((step, stepIndex) => {
+                    const globalStepIndex = rowIndex * stepsPerRow + stepIndex; // Calculate the correct index for navigation
+
+                    // Calculate the correct icon number
+                    let iconNumber;
+                    if (rowIndex % 2 === 0) {
+                      // Even row
+                      iconNumber = globalStepIndex + 1; // Normal order
+                    } else {
+                      // Odd row
+                      iconNumber = (rowIndex + 1) * stepsPerRow - stepIndex; // Reverse order
+                    }
+
+                    return (
+                      <Step
+                        key={step.label}
+                        completed={completedSteps.has(globalStepIndex)}
+                      >
+                        <StepLabel
+                          StepIconComponent={(props) => (
+                            <StepIcon
+                              {...props}
+                              completed={completedSteps.has(globalStepIndex)}
+                              icon={iconNumber} // Use the calculated icon number
+                            />
+                          )}
+                          onClick={() => handleStepClick(globalStepIndex)} // Use the correct step index
+                        >
+                          <Typography
+                            variant="h6"
+                            sx={{
+                              fontWeight: "bold",
+                              color: "#02216F",
+                            }}
+                          >
+                            {step.label}
+                          </Typography>
+                        </StepLabel>
+                      </Step>
+                    );
+                  })}
+                </Stepper>
+              </Grid>
             ))}
-          </Stepper>
+          </Grid>
         </Box>
       ))}
     </div>

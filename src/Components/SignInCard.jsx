@@ -7,37 +7,30 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import { styled } from '@mui/material/styles';
 import ForgotPassword from './ForgotPassword';
-import {FormTextField} from "../commonComponents";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { formSchema } from "../utils/schema";
-import {DomLink} from '../components'
+import { DomLink } from '../components';
 import { useSignInMutation } from '../Redux/Auth/AuthReducer';
 import { useNavigate } from 'react-router-dom';
 
 const CustomFormHelperText = styled('p')({
   fontSize: '10px',
-}); 
+});
 
 export default function SignInCard() {
-  
-  const navigator = useNavigate(); 
-  const [UserLogin, {isSuccess}] = useSignInMutation()
+  const navigator = useNavigate();
+  const [UserLogin] = useSignInMutation();
   const formMethods = useForm({
     resolver: yupResolver(formSchema),
   });
 
-  const formHandleSubmit = (data) => {
-    console.log("data :", data);
-    formMethods.reset();
-  };
-
-  
   const [errors, setErrors] = React.useState({
     email: '',
     password: '',
   });
   const [open, setOpen] = React.useState(false);
+  const [loginError, setLoginError] = React.useState(''); // State to store login error message
 
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -55,7 +48,7 @@ export default function SignInCard() {
     }
 
     if (!password || password.length < 6) {
-      formErrors.password = 'Password must be at least 6 characters long.';
+      formErrors.password = 'Enter the Valid Password';
       isValid = false;
     }
 
@@ -65,20 +58,20 @@ export default function SignInCard() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoginError(''); // Reset error message
     if (validateInputs()) {
       const data = new FormData(event.currentTarget);
       try {
-        const response = await UserLogin({Email:data.get('email') , Password:data.get('password')}).unwrap();
-        sessionStorage.setItem("Token",response)
+        const response = await UserLogin({ Email: data.get('email'), Password: data.get('password') }).unwrap();
+        sessionStorage.setItem("Token", response);
         navigator("/Explore");
       } catch (error) {
-        console.error("Signup failed:", error);
+        setLoginError('Invalid email or password. Please try again.'); // Set error message
       }
       console.log({
         email: data.get('email'),
         password: data.get('password'),
       });
-     
     }
   };
 
@@ -105,6 +98,11 @@ export default function SignInCard() {
         noValidate
         sx={{ display: 'flex', flexDirection: 'column', width: '80%', gap: 2 }}
       >
+        {loginError && ( // Conditionally render login error message
+          <Typography color="error" sx={{ fontSize: '12px' }}>
+            {loginError}
+          </Typography>
+        )}
         <FormControl>
           <TextField
             error={!!errors.email}
@@ -122,7 +120,6 @@ export default function SignInCard() {
               backgroundColor: 'transparent',
               '& .MuiOutlinedInput-root': {
                 height: '40px',
-             
                 '& input': {
                   height: '100%',
                   padding: '0 14px',
@@ -151,7 +148,6 @@ export default function SignInCard() {
               backgroundColor: 'transparent',
               '& .MuiOutlinedInput-root': {
                 height: '40px',
-                
                 '& input': {
                   height: '100%',
                   padding: '0 14px',

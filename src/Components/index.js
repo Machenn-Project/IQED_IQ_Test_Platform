@@ -11,7 +11,8 @@ import SideBarHeader from "./SideBarHeader";
 import LevelDetails from "./LevelDetails";
 import ResultCard from "./ResultCard";
 import AnsKeyArea from "./AnsKeyArea";
-
+import ProfileCard from "./ProfileCard";
+import TotalQuests from "./TotalQuests"
 export  {
   ForgotPassword,
   SignInCard,
@@ -25,5 +26,7 @@ export  {
   SideBarHeader,
   LevelDetails,
   ResultCard,
-  AnsKeyArea
+  AnsKeyArea,
+  ProfileCard,
+  TotalQuests
 };

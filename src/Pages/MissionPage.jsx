@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Box, useMediaQuery, useTheme } from "@mui/material";
-import MainNavBar from "../commonComponents/MainNavBar";
+import { Box, Grid, useMediaQuery, useTheme } from "@mui/material";
+import {MainNavBar,Levelcard } from "../commonComponents";
 import { LevelDetails, SidebarContent } from "../components";
 import { BreadcrumbsNav } from "../commonComponents";
-import LevelCard from "../commonComponents/LevelCard";
 import { trophy } from "../assets";
 import { useLocation } from "react-router-dom";
 // Mock data for levels
@@ -15,7 +14,7 @@ const levels = [
   { level: 5, total: 10, progress: 2, image: trophy },
 ];
 
-const MissionPage = ( ) => {
+const MissionPage = () => {
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
   const location = useLocation();
@@ -75,7 +74,6 @@ const MissionPage = ( ) => {
             pr: isSm ? "10px" : null,
             gap: "20px",
             overflow: "hidden",
-
           }}
         >
           {/* Breadcrumb */}
@@ -94,31 +92,41 @@ const MissionPage = ( ) => {
               scrollbarWidth: "none",
             }}
           >
-            {!selectedLevel ? (
-              // Display Level Cards
-              levels.map((levelData, index) => (
-                <LevelCard
-                  key={index}
-                  level={levelData.level}
-                  progress={levelData.progress}
-                  total={levelData.total}
-                  image={levelData.image}
-                  onSelect={() => handleSelectLevel(levelData)} // Continue button triggers this
-                />
-              ))
-            ) : (
-              // Display Level Details once a level is selected
-              <LevelDetails level={selectedLevel} />
-            )}
+            <Grid container spacing={2}>
+              {!selectedLevel ? (
+                levels.map((levelData, index) => (
+                  <Grid item xs={12} sm={6} md={4} lg={4} key={index}>
+                    <Levelcard
+                      level={levelData.level}
+                      progress={levelData.progress}
+                      total={levelData.total}
+                      image={levelData.image}
+                      onSelect={() => handleSelectLevel(levelData)}
+                    />
+                  </Grid>
+                ))
+              ) : (
+                <LevelDetails level={selectedLevel} />
+              )}
+            </Grid>
           </Box>
         </Box>
       </Box>
-
-      {isSm ? (
+      <Box
+        sx={{
+          // bgcolor: "red",
+          width: isSm ? "100%" : "400px",
+          height: isSm ? "60px" : "auto",
+          boxShadow: isSm ? null : "0 0 5px 6px #9C9999", 
+        }}
+      >
+        <SidebarContent/>
+      </Box>
+      {/* {isSm ? (
         <Box sx={{ width: "100%", height: "60px" }}>
           <SidebarContent />
         </Box>
-      ) : null}
+      ) : null} */}
     </Box>
   );
 };

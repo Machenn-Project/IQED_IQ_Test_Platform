@@ -12,6 +12,8 @@ import {
   Button,
   CircularProgress,
   Zoom,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 
@@ -67,9 +69,9 @@ const CircularTimer = ({ timeLeft, totalTime }) => {
           :{(timeLeft % 60).toString().padStart(2, "0")}
         </Typography>
         {/* Total Time (Static) */}
-        <Typography variant="body2" sx={{ color: "white", mt: 1 }}>
+        {/* <Typography variant="body2" sx={{ color: "white", mt: 1 }}>
           {`${Math.floor(totalTime / 60)}:00 Total`}
-        </Typography>
+        </Typography> */}
       </Box>
     </Box>
   );
@@ -103,6 +105,9 @@ const Item = ({ children, isSelected, onClick }) => {
 };
 
 const QuizPage = ({ quizData, isGeneral,Level}) => {
+   const theme = useTheme();
+  const isMd = useMediaQuery(theme.breakpoints.down("md"));
+  const isSm = useMediaQuery(theme.breakpoints.down("sm"));
   const totalTime = quizData.length * 60; // Total time based on the number of questions (60s per question)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
@@ -264,7 +269,9 @@ const QuizPage = ({ quizData, isGeneral,Level}) => {
               padding: "20px",
             }}
           >
-            <Typography variant="h5">Timer</Typography>
+            <Typography variant="h5" mb={'30px'} sx={{
+              fontWeight:'bold'
+            }}>Timer</Typography>
 
             {/* Circular Timer Component */}
             <CircularTimer timeLeft={timeLeft} totalTime={totalTime} />
@@ -428,6 +435,9 @@ const QuizPage = ({ quizData, isGeneral,Level}) => {
                   width: "98%",
                   height: "75%",
                   borderRadius: "4px",
+                  textAlign:'center',
+                  boxSizing:'border-box',
+                  p:'10px'
                 }}
               >
                 <Typography variant="h6" fontWeight={"600"}>

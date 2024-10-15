@@ -47,12 +47,12 @@ const SidebarContent = () => {
             gap: "20px",
           }}
         >
-          <Divider
+          {/* <Divider
             sx={{
               width: "100%",
               borderBottomWidth: 2,
             }}
-          />
+          /> */}
 
           <Box sx={{ display: "flex", gap: "4px" }}>
             {["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"].map(

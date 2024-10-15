@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { formSchema, passwordSchema} from "../utils/schema";
+import { formSchema, passwordSchema } from "../utils/schema";
 import { FormTextField } from "../commonComponents";
 import { DomLink } from "../components";
 import { FormControl, Link, TextField } from "@mui/material";
@@ -13,7 +13,7 @@ import { UpdateUser } from "../Redux/User/User";
 import {
   useSendEmailOTPMutation,
   useVerifyEmailOTPMutation,
-  useSignUpMutation
+  useSignUpMutation,
 } from "../Redux/Auth/AuthReducer";
 import { useNavigate } from "react-router-dom";
 
@@ -28,8 +28,6 @@ export default function SignUpCard() {
   const BasicForm = useForm({
     resolver: yupResolver(formSchema),
   });
-
-  
 
   const PassForm = useForm({
     resolver: yupResolver(passwordSchema),
@@ -60,19 +58,19 @@ export default function SignUpCard() {
     try {
       // Dispatch the final form data to update the Redux state
       dispatch(UpdateUser(data));
-  
+
       // Collect all the user data from Redux (this assumes you have the necessary fields in UserData)
       const userDataToSubmit = {
         ...UserData,
         Password: data.Password,
       };
-  
+
       // Call the AddUser mutation with the user data
       const response = await AddUser(userDataToSubmit).unwrap();
-  
+
       if (response) {
         console.log("User added successfully:", response);
-        navigator("/Signin")
+        navigator("/Signin");
         // Handle success (e.g., redirect to login page or show success message)
       }
     } catch (error) {
@@ -80,8 +78,6 @@ export default function SignUpCard() {
       // Handle error (e.g., show error message)
     }
   };
-  
-
 
   const handleSendEmailOTP = async (Email) => {
     try {
@@ -198,6 +194,12 @@ export default function SignUpCard() {
               >
                 Next
               </Button>
+              <Typography sx={{ textAlign: "center", fontSize: "12px" }}>
+                I have an account?{" "}
+                <span>
+                  <DomLink to="/Signin" text="Sign In" />
+                </span>
+              </Typography>
             </Box>
           </FormProvider>
         </>

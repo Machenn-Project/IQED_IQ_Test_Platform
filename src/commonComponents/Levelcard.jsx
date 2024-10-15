@@ -17,7 +17,8 @@ const LevelCard = ({ level, progress, total, image, onSelect }) => {
       sx={{
         display: "flex",
         // height:'150px',
-        flexDirection:isSm?'column-reverse':null,
+        // flexDirection:isSm?'column-reverse':null,
+        flexDirection:'column-reverse',
         alignItems: "center",
         justifyContent: "space-between",
         padding: "20px",
@@ -45,18 +46,18 @@ const LevelCard = ({ level, progress, total, image, onSelect }) => {
           }}
         >
           <Typography
-            variant="h5"
+            variant= {isMd?"h6":"h5"}
             sx={{
               fontWeight: "bold",
               color: "#02216F",
             }}
           >{`Level ${level}`}</Typography>
           <Typography
-            variant="h5"
+            variant="h6"
             sx={{
               fontWeight: "bold",
               color: "#02216F",
-              px: "30px",
+              px: "10%",
               bgcolor: "rgba(241, 154, 255, 0.4)",
               borderRadius: "50px",
             }}

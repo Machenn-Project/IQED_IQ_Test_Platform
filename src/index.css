@@ -1,10 +1,13 @@
 *{
     margin: 0;
     padding: 0;
-    font-family:"Poppins, sans-seri";
+    font-family:"Poppins" !important;
+
 }
 
 b{
     font-family: "Poppins", sans-serif;
     font-weight: bolder;
   }
+
+

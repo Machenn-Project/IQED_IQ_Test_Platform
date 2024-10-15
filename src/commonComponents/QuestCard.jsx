@@ -1,7 +1,7 @@
 import { Avatar, Box, Card, LinearProgress, Typography } from "@mui/material";
 import React from "react";
 
-const QuestCard = ({ icon, title, progress, goal, reward }) => {
+const QuestCard = ({ icon, title, progress, goal, reward, About }) => {
   return (
     <Card
       variant="outlined"
@@ -49,7 +49,7 @@ const QuestCard = ({ icon, title, progress, goal, reward }) => {
               borderRadius: 10,
               marginY: 1,
               width: "100%",
-               backgroundColor: "#02216F",
+              backgroundColor: "#02216F",
               "& .MuiLinearProgress-bar": {
                 backgroundColor: "#FFDA55",
               },
@@ -59,6 +59,9 @@ const QuestCard = ({ icon, title, progress, goal, reward }) => {
             {progress}/{goal}
           </Typography>
         </Box>
+        <Typography variant="caption" fontWeight="400" color="Black">
+          {About}
+        </Typography>
       </Box>
     </Card>
   );

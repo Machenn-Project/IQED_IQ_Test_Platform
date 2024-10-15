@@ -42,7 +42,7 @@ const ExplorePage = () => {
             ml: isSm ? "10px" : null,
             mr: isSm ? "10px" : null,
             mt: isSm ? "10px" : "20px",
-            mb: isSm ? "10px" : "20px",
+            mb: isSm ? "50px" : "20px",
             gap: "20px",
             overflowY: "auto",
             "&::-webkit-scrollbar": {

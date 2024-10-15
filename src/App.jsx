@@ -10,7 +10,7 @@ import { SignIn, SignUp } from "./pages/AuthPages";
 import { ContestPage, ExplorePage, GeneralQuizPage, GQGetResult, GQGetResultWA, GQSuccessPage, Home, MissionPage,LeaderboardPage, ProfilePage, SupportPage, SettingsPage, QuizResultPage, AnsKeyPage, CommenQuizTest } from "./pages";
 import { BlueBg, WhiteBg, YellowBg } from "./assets/Bg";
 import { Box } from "@mui/material";
-
+import './App.css'
 
 const DynamicBackground = ({ children }) => {
   const location = useLocation();
