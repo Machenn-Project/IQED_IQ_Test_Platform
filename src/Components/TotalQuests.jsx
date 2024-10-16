@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Box, Grid, Typography, Tabs, Tab ,useMediaQuery, useTheme } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Typography,
+  Tabs,
+  Tab,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { Group, PersonAdd } from "@mui/icons-material/";
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 import AdsClickIcon from "@mui/icons-material/AdsClick";
@@ -26,23 +34,21 @@ const TotalQuests = () => {
             textTransform: "none",
             padding: "12px 24px",
             borderRadius: "10px",
-            color: "#fff",
             bgcolor: "#3f51b5",
-            mx: 1, 
-            my: 1, 
+            mx: 1,
+            my: 1,
             fontWeight: "bold",
-            "&:hover": {
-              bgcolor: isSm?null:"#5c6bc0",
-            },
+            color: "#fff !important",
           },
           "& .Mui-selected": {
             border: "2px solid",
             borderColor: "#FFDA55",
             boxShadow: "2px 3px #FFDA55",
             bgcolor: "#1A237E",
+            color: "#fff !important",
           },
           "& .MuiTabs-indicator": {
-            display: "none", // Hide the default tab indicator
+            display: "none",
           },
         }}
       >
