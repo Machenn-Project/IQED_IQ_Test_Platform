@@ -8,9 +8,9 @@ import {
   useTheme,
 } from "@mui/material";
 import React from "react";
-import SideBarHeader from "./SideBarHeader";
+import SideBarHeader from "../components/SideBarHeader";
 import { Coin, FireIcon, RankIcon } from "../assets";
-import { LevelTagCard, StatsCard } from "../commonComponents";
+import { LevelTagCard, StatsCard } from ".";
 import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
 
 const SidebarContent = () => {

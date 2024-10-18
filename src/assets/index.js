@@ -9,4 +9,7 @@ import trophy from './trophy.png'
 import SuccessMan from './SuccessMan.svg'
 import Vs from './VS.png'
 import AI_Icon from './AI_Icon.png'
-export  {IQEDLogo,Pop,IQEDIcon,NeetImage,FireIcon,Coin,RankIcon,trophy,SuccessMan,Vs,AI_Icon};
+import cross_swords from './cross_swords.svg'
+import MathImg from './MathImage.jpg'
+import feedback from './feedback.png'
+export  {IQEDLogo,Pop,IQEDIcon,NeetImage,FireIcon,Coin,RankIcon,trophy,SuccessMan,Vs,AI_Icon,cross_swords,MathImg,feedback};

@@ -1,32 +1,16 @@
-import AutoTextCarousel from "./AutoTextCarousel";
-import ForgotPassword from "./ForgotPassword";
-import SignInCard from "./SignInCard";
-import SignUpCard from "./SignUpCard";
-import DomLink from "./DomLink";
-import HomeNav from "./HomeNav";
-import CompetitiveExam from "./CompetitiveExam";
-import DandFQuests from "./DandFQuests";
-import SidebarContent from "./SidebarContent";
-import SideBarHeader from "./SideBarHeader";
-import LevelDetails from "./LevelDetails";
-import ResultCard from "./ResultCard";
-import AnsKeyArea from "./AnsKeyArea";
-import ProfileCard from "./ProfileCard";
-import TotalQuests from "./TotalQuests"
-export  {
-  ForgotPassword,
-  SignInCard,
-  SignUpCard,
-  DomLink,
-  AutoTextCarousel,
-  HomeNav,
-  CompetitiveExam,
-  DandFQuests,
-  SidebarContent,
-  SideBarHeader,
-  LevelDetails,
-  ResultCard,
-  AnsKeyArea,
-  ProfileCard,
-  TotalQuests
-};
+export { default as AutoTextCarousel } from './AutoTextCarousel';
+export { default as ForgotPassword } from './ForgotPassword';
+export { default as SignInCard } from './SignInCard';
+export { default as SignUpCard } from './SignUpCard';
+export { default as DomLink } from './DomLink';
+export { default as HomeNav } from './HomeNav';
+export { default as CompetitiveExam } from './CompetitiveExam';
+export { default as DandFQuests } from './DandFQuests';
+export { default as SideBarHeader } from './SideBarHeader';
+export { default as LevelDetails } from './LevelDetails';
+export { default as ResultCard } from './ResultCard';
+export { default as AnsKeyArea } from './AnsKeyArea';
+export { default as ProfileCard } from './ProfileCard';
+export { default as TotalQuests } from './TotalQuests';
+export { default as ContestCardArea } from './ContestCardArea';
+export { default as DuelCardTopicsArea } from './DuelCardTopicsArea';

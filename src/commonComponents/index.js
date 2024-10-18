@@ -12,5 +12,6 @@ export {default as BreadcrumbsNav  } from './BreadcrumbsNav';
 export { default as LevelTagCard} from './LevelTagcard';
 export { default as Levelcard } from './LevelCard';
 export { default as ContestCard } from './ContestCard';
-
+export {default as Icon} from './Icon'
 export { default as RewardCard } from './RewardCard';
+export { default as SidebarContent } from './SidebarContent';

@@ -1,7 +1,8 @@
 import { Box, useMediaQuery, useTheme } from "@mui/material";
 import React from "react";
 import MainNavBar from "../commonComponents/MainNavBar"; // Make sure the import path is correct
-import { CompetitiveExam, DandFQuests, SidebarContent } from "../components";
+import { CompetitiveExam, DandFQuests } from "../components";
+import { SidebarContent } from "../commonComponents";
 
 const ExplorePage = () => {
   const theme = useTheme();

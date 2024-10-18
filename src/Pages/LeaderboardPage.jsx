@@ -1,7 +1,7 @@
 import { Box, Divider, Typography, useMediaQuery, useTheme } from "@mui/material";
 import React, { useState } from "react";
-import { MainNavBar } from "../commonComponents";
-import { SidebarContent } from "../components";
+import { MainNavBar, SidebarContent } from "../commonComponents";
+
 
 const LeaderboardPage = () => {
   const theme = useTheme();
@@ -74,7 +74,7 @@ const LeaderboardPage = () => {
             sx={{
               display: "flex",
               flexDirection: "column",
-              alignItems: "center",
+              alignItems: "center", 
               justifyContent: "center",
               gap: "20px",
               boxSizing: "border-box",
@@ -125,16 +125,18 @@ const LeaderboardPage = () => {
           <Divider sx={{ borderColor: "#FFDA55", borderBottomWidth: 2 }} />
 
           {/* Leaderboard Table Header */}
+          
           <Box
             sx={{
               display: "grid",
               gridTemplateColumns: "repeat(5, 1fr)",
               bgcolor: "#1A49BA",
               p: "10px",
-              borderRadius: "8px",
+              
               color: "#fff",
               fontWeight: "bold",
               textAlign: "center",
+              clipPath: "polygon(5% 0, 100% 0%, 95% 100%, 0 100%)"
             }}
           >
             <Typography sx={{ color: "#FFD700" }}>RANKING</Typography>
@@ -170,6 +172,7 @@ const LeaderboardPage = () => {
                     p: "10px",
                     borderRadius: "8px",
                     textAlign: "center",
+                    clipPath: "polygon(5% 0, 100% 0%, 95% 100%, 0 100%)"
                   }}
                 >
                   <Typography sx={{ fontWeight: "bold", color: "#1A49BA" }}>

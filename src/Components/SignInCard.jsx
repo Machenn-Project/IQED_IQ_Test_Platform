@@ -46,12 +46,10 @@ export default function SignInCard() {
       formErrors.email = 'Please enter a valid email address.';
       isValid = false;
     }
-
     if (!password || password.length < 6) {
       formErrors.password = 'Enter the Valid Password';
       isValid = false;
     }
-
     setErrors(formErrors);
     return isValid;
   };

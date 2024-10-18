@@ -1,9 +1,10 @@
+// ExplorePage.js
 import { Box, Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
-import React, { useState } from "react";
-import { MainNavBar, ContestCard } from "../commonComponents";
-import { BreadcrumbsNav } from "../commonComponents";
-import { SidebarContent } from "../components";
-import { trophy,Vs } from "../assets";
+import React from "react";
+import { MainNavBar, SidebarContent } from "../commonComponents";
+import { trophy, Vs } from "../assets";
+import { ContestCardArea, DuelCardTopicsArea } from "../components";
+
 
 const Contest = [
   {
@@ -27,7 +28,8 @@ const Contest = [
     image: Vs
   },
 ];
-const ExplorePage = () => {
+
+const ContestPage = () => {
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -54,7 +56,7 @@ const ExplorePage = () => {
         }}
       >
         {/* Main navigation */}
-        <MainNavBar selectedPage="Contest" />
+        <MainNavBar selectedPage="1v1 Duel" />
 
         <Box
           sx={{
@@ -79,7 +81,6 @@ const ExplorePage = () => {
               flexDirection: "column",
               flexGrow: 0,
               gap: isSm ? "10px" : "20px",
-
               bgcolor: "#1A49BA",
               boxSizing: "border-box",
               p: "20px",
@@ -94,7 +95,7 @@ const ExplorePage = () => {
                 fontWeight: "bold",
               }}
             >
-              welcome tO The contest
+              Welcome to the 1 vs 1 Duel Arena!
             </Typography>
             <Typography
               sx={{
@@ -103,43 +104,19 @@ const ExplorePage = () => {
                 fontWeight: 400,
               }}
             >
-              Challenge yourself and your friends with AI-generated questions to
-              boost your knowledge! {isSm ? null : <br />}
-              Compete for the top spot and see who comes out on top
+              Step into the arena and challenge your friends in a thrilling one-on-one quiz battle! {isSm ? null : <br />} 
+              Test your knowledge with AI-crafted questions, outsmart your opponent, 
+              and claim the crown as the ultimate quiz champion. It's time to see who really has what it takes!
             </Typography>
-          </Box>
-          <Box
-            sx={{
-              p: isSm ? "10px" : null,
-              display: "flex",
-              flexDirection: "column",
-              flexGrow: 1,
-              gap: "20px",
-              overflowY: "auto",
-              "&::-webkit-scrollbar": {
-                display: "none",
-              },
-              scrollbarWidth: "none",
-              // bgcolor: "black",
-            }}
-          >
-            {/* <Grid container spacing={2}> */}
-            {Contest.map((ContestData, index) => (
-              // <Grid item xs={12} sm={6} md={4} lg={12} key={index}>
-              <ContestCard
-                Title={ContestData.Title}
-                image={ContestData.image}
-                listItems={ContestData.listItems}
-              />
-              // </Grid>
-            ))}
-            {/* </Grid> */}
-          </Box>
+          </Box>  
+
+          {/* Bottom card area */}
+          {/* <ContestCardArea contestData={Contest} />  */}
+          <DuelCardTopicsArea contestData={Contest} /> 
         </Box>
       </Box>
       <Box
         sx={{
-          // bgcolor: "red",
           width: isSm ? "100%" : "400px",
           height: isSm ? "60px" : "auto",
           boxShadow: isSm ? null : "0 0 5px 6px #9C9999", 
@@ -147,13 +124,8 @@ const ExplorePage = () => {
       >
         <SidebarContent/>
       </Box>
-      {/* {isSm ? (
-        <Box sx={{ width: "100%", height: "60px" }}>
-          <SidebarContent />
-        </Box>
-      ) : null} */}
     </Box>
   );
 };
 
-export default ExplorePage;
+export default ContestPage;

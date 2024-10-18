@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box, Grid, useMediaQuery, useTheme } from "@mui/material";
-import {MainNavBar,Levelcard } from "../commonComponents";
-import { LevelDetails, SidebarContent } from "../components";
+import {MainNavBar,Levelcard, SidebarContent } from "../commonComponents";
+import { LevelDetails} from "../components";
 import { BreadcrumbsNav } from "../commonComponents";
 import { trophy } from "../assets";
 import { useLocation } from "react-router-dom";

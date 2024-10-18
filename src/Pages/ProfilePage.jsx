@@ -2,7 +2,7 @@ import { Box, Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
 import React, { useState } from "react";
 import { MainNavBar, ContestCard } from "../commonComponents";
 import { BreadcrumbsNav } from "../commonComponents";
-import { DandFQuests, ProfileCard, SidebarContent, TotalQuests } from "../components";
+import { DandFQuests, ProfileCard, TotalQuests } from "../components";
 import { trophy,Vs } from "../assets";
 
 const ProfilePage = () => {
