@@ -122,9 +122,21 @@ const GuestList = ({ guests }) => (
       Player
     </Typography>
     {guests.map((guest, index) => (
-      <Stack key={index} direction="row" spacing={2} sx={{ alignItems: "center" }}>
-        <Avatar src={guest.avatar} alt={guest.name} sx={{ width: 50, height: 50 }} />
-        <Typography variant="body1" sx={{ fontWeight: "500", color: "#02216F" }}>
+      <Stack
+        key={index}
+        direction="row"
+        spacing={2}
+        sx={{ alignItems: "center" }}
+      >
+        <Avatar
+          src={guest.avatar}
+          alt={guest.name}
+          sx={{ width: 50, height: 50 }}
+        />
+        <Typography
+          variant="body1"
+          sx={{ fontWeight: "500", color: "#02216F" }}
+        >
           {guest.name} (Guest)
         </Typography>
       </Stack>
@@ -179,66 +191,69 @@ const PlayerLobby = () => {
             boxSizing: "border-box",
           }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              flexGrow: 0,
-              height: isSm ? null : "20%",
-              width: isSm ? null : "30%",
-              gap: isSm ? "10px" : "20px",
-              bgcolor: "#FFDA55",
-              boxSizing: "border-box",
-              p: "20px",
-              borderRadius: "10px",
-              color: "#02216F",
-              border: "1px solid",
-              borderColor: "#02216F",
-              boxShadow: "3px 5px #02216F",
-            }}
-          >
-            <Typography
-              variant={isSm ? "h6" : "h5"}
-              sx={{
-                display: "flex",
-                gap: "10px",
-                fontWeight: "bold",
-                alignItems: "center",
-              }}
-            >
-              <TopicIcon />
-              Topics Details
-            </Typography>
+          {/* left area */}
+          <Box sx={{width: isSm ? null : "30%",}}>
             <Box
               sx={{
-                bgcolor: "#1A49BA",
-                p: "10px",
-                color: "white",
                 display: "flex",
-                flexDirection: "row",
+                flexDirection: "column",
+               
+                
+                gap: isSm ? "10px" : "20px",
+                bgcolor: "#FFDA55",
+                boxSizing: "border-box",
+                p: "20px",
                 borderRadius: "10px",
-                alignItems: 'center'
+                color: "#02216F",
+                border: "1px solid",
+                borderColor: "#02216F",
+                boxShadow: "3px 5px #02216F",
               }}
             >
               <Typography
+                variant={isSm ? "h6" : "h5"}
                 sx={{
-                  fontSize: "14px",
+                  display: "flex",
+                  gap: "10px",
                   fontWeight: "bold",
-                  width: '60%',
+                  alignItems: "center",
                 }}
               >
-                {topic} {/* Display the passed topic */}
+                <TopicIcon />
+                Topics Details
               </Typography>
-              <Typography
+              <Box
                 sx={{
-                  fontSize: "14px",
-                  fontWeight: "bold",
+                  bgcolor: "#1A49BA",
+                  p: "10px",
+                  color: "white",
+                  display: "flex",
+                  flexDirection: "row",
+                  borderRadius: "10px",
+                  alignItems: "center",
                 }}
               >
-                {questions} Qus {/* Display the number of questions */}
-              </Typography>
+                <Typography
+                  sx={{
+                    fontSize: "14px",
+                    fontWeight: "bold",
+                    width: "60%",
+                  }}
+                >
+                  {topic} {/* Display the passed topic */}
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: "14px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {questions} Qus {/* Display the number of questions */}
+                </Typography>
+              </Box>
             </Box>
           </Box>
+          {/* right area */}
           <Box
             sx={{
               flexGrow: 1,
