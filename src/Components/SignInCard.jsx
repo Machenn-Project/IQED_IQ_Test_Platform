@@ -13,6 +13,8 @@ import { formSchema } from "../utils/schema";
 import { DomLink } from '../components';
 import { useSignInMutation } from '../Redux/Auth/AuthReducer';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch,useSelector } from 'react-redux';
+import { UpdateUser } from '../Redux/User/User';
 
 const CustomFormHelperText = styled('p')({
   fontSize: '10px',
@@ -21,6 +23,7 @@ const CustomFormHelperText = styled('p')({
 export default function SignInCard() {
   const navigator = useNavigate();
   const [UserLogin] = useSignInMutation();
+  const dispatch = useDispatch();
   const formMethods = useForm({
     resolver: yupResolver(formSchema),
   });
@@ -62,6 +65,8 @@ export default function SignInCard() {
       try {
         const response = await UserLogin({ Email: data.get('email'), Password: data.get('password') }).unwrap();
         sessionStorage.setItem("Token", response);
+        console.log(response);
+        dispatch(UpdateUser(response))
         navigator("/Explore");
       } catch (error) {
         setLoginError('Invalid email or password. Please try again.'); // Set error message
