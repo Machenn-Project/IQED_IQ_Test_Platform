@@ -35,7 +35,7 @@ const MissionPage = () => {
   const handleSelectLevel = (level) => {
     setSelectedLevel(level);
   };
-
+ 
   return (
     <Box
       sx={{
@@ -106,7 +106,10 @@ const MissionPage = () => {
                   </Grid>
                 ))
               ) : (
-                <LevelDetails level={selectedLevel} />
+                (() => {
+                  console.log("dsdsdsd",selectedLevel.level);
+                  return <LevelDetails LevelData={selectedLevel.level} />;
+                })()
               )}
             </Grid>
           </Box>

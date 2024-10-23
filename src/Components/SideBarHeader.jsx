@@ -197,7 +197,7 @@ const SideBarHeader = () => {
                   mr: 1,
                 },
                 "&::before": {
-                  content: '""',
+                  content: '""',  
                   display: "block",
                   position: "absolute",
                   border:'1px solid',

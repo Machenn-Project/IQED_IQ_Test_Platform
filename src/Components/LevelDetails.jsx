@@ -13,6 +13,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
+import { DaTa } from "../utils/schema";
 
 // Styled components
 const StepCircle = styled("div")(({ theme, completed }) => ({
@@ -66,61 +67,11 @@ const CustomConnector = styled(StepConnector)(({ theme }) => ({
   },
 }));
 
-const DaTa = [
-  {
-    title: "Numbers",
-    steps: [
-      { label: "Number line" },
-      { label: "Types of numbers" },
-      { label: "Prime numbers" },
-      { label: "Tally system" },
-      { label: "Co-prime" },
-      { label: "Fractions" },
-      { label: "Decimals" },
-      { label: "Percentages" },
-      { label: "Ratios" },
-      { label: "Integers" },
-      { label: "Exponents" },
-      { label: "Square roots" },
-    ],
-  },
-  {
-    title: "Numbers1",
-    steps: [
-      { label: "Number line" },
-      { label: "Types of numbers" },
-      { label: "Prime numbers" },
-      { label: "Tally system" },
-      { label: "Co-prime" },
-      { label: "Fractions" },
-      { label: "Decimals" },
-      { label: "Percentages" },
-      { label: "Ratios" },
-      { label: "Integers" },
-      { label: "Exponents" },
-      { label: "Square roots" },
-    ],
-  },
-  {
-    title: "Numbers2",
-    steps: [
-      { label: "Number line" },
-      { label: "Types of numbers" },
-      { label: "Prime numbers" },
-      { label: "Tally system" },
-      { label: "Co-prime" },
-      { label: "Fractions" },
-      { label: "Decimals" },
-      { label: "Percentages" },
-      { label: "Ratios" },
-      { label: "Integers" },
-      { label: "Exponents" },
-      { label: "Square roots" },
-    ],
-  },
-];
 
-export default function LevelDetails(Level) {
+
+
+
+export default function LevelDetails(LevelData) {
   const [activeStep, setActiveStep] = useState(0);
   const [completedSteps, setCompletedSteps] = useState(new Set([]));
   const location = useLocation();
@@ -141,7 +92,7 @@ export default function LevelDetails(Level) {
 
   const handleStepClick = (stepIndex) => {
     setActiveStep(stepIndex);
-    navigate("/CommenQuizTest", { state: { stepIndex, Level } });
+    navigate("/CommenQuizTest", { state: { stepIndex, LevelData } });
   };
 
   // Function to arrange steps into rows
@@ -161,13 +112,17 @@ export default function LevelDetails(Level) {
     return rows;
   };
 
-  
-  const stepsPerRow = isSm?3:5; 
-  const stepRows = arrangeSteps(DaTa[0].steps, stepsPerRow);
-
+  const setLevel = LevelData.LevelData;
+  console.log("setLevel",setLevel)
+  const currentLevelData = DaTa[setLevel - 1].categories; 
   return (
-    <div>
-      {DaTa.map((section, index) => (
+    <Box>
+       {currentLevelData.map((section, index) => {
+        // Calculate stepRows for each section here
+        const stepsPerRow = isSm ? 3 : 5;
+        const stepRows = arrangeSteps(section.steps, stepsPerRow); // Use section.steps instead of DaTa[0].steps
+
+        return (
         <Box key={index} p={isSm?0:4}>
           <Box
             sx={{
@@ -246,7 +201,8 @@ export default function LevelDetails(Level) {
             ))}
           </Grid>
         </Box>
-      ))}
-    </div>
+       );
+      })}
+    </Box>
   );
 }
