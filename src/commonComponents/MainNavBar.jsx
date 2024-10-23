@@ -37,7 +37,7 @@ const MainNavBar = ({ selectedPage }) => {
     ...(isSm ? [{ label: "FeedBack", icon: <ErrorIcon />, path: "/Support" },] : []),
   ];
   const bottomItems = [
-    { label: "Settings", icon: <SettingsIcon />, path: "/Settings" },
+    // { label: "Settings", icon: <SettingsIcon />, path: "/Settings" },
     { label: "FeedBack", icon: <ErrorIcon />, path: "/Support" },
   ];
 

@@ -11,6 +11,7 @@ import { ContestPage, ExplorePage, GeneralQuizPage, GQGetResult, GQGetResultWA, 
 import { BlueBg, WhiteBg, YellowBg } from "./assets/Bg";
 import { Box } from "@mui/material";
 import './App.css'
+import { PlayerLobby } from "./components";
 
 const DynamicBackground = ({ children }) => {
   const location = useLocation();
@@ -66,6 +67,7 @@ const App = () => {
           <Route path="/QuizResult" element={<QuizResultPage/>}></Route>
           <Route path="/AnsKeyPage" element={<AnsKeyPage/>}></Route>
           <Route path="/CommenQuizTest" element={<CommenQuizTest/>}></Route>
+          <Route path="/PlayerLobby" element={<PlayerLobby/>}></Route>
         </Routes>
       </DynamicBackground>
     </BrowserRouter>

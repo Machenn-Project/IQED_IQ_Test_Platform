@@ -12,4 +12,5 @@ import AI_Icon from './AI_Icon.png'
 import cross_swords from './cross_swords.svg'
 import MathImg from './MathImage.jpg'
 import feedback from './feedback.png'
-export  {IQEDLogo,Pop,IQEDIcon,NeetImage,FireIcon,Coin,RankIcon,trophy,SuccessMan,Vs,AI_Icon,cross_swords,MathImg,feedback};
+import qr from './qr.svg'
+export  {IQEDLogo,Pop,IQEDIcon,NeetImage,FireIcon,Coin,RankIcon,trophy,SuccessMan,Vs,AI_Icon,cross_swords,MathImg,feedback,qr};

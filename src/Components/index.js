@@ -14,3 +14,4 @@ export { default as ProfileCard } from './ProfileCard';
 export { default as TotalQuests } from './TotalQuests';
 export { default as ContestCardArea } from './ContestCardArea';
 export { default as DuelCardTopicsArea } from './DuelCardTopicsArea';
+export {default as PlayerLobby} from "./PlayerLobby";
