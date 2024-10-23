@@ -11,6 +11,8 @@ import {
   Slide,
   Grow,
   Divider,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import PeopleIcon from "@mui/icons-material/People";
 import CardContent from "@mui/material/CardContent";
@@ -28,7 +30,8 @@ const DuelCardTopicsArea = () => {
   const [open, setOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [searchInput, setSearchInput] = useState("");
-
+  const theme = useTheme();
+  const isSm = useMediaQuery(theme.breakpoints.down("sm"));
   const cardData = [
     { id: 1, title: "Types of Numbers", image: MathImg, questions: 10 },
     { id: 2, title: "Prime Numbers", image: MathImg, questions: 15 },
@@ -109,7 +112,7 @@ const DuelCardTopicsArea = () => {
             px: "10px",
             py: "5px",
             borderRadius: "5px",
-            fontSize: "18px",
+            fontSize: isSm?"14px":"18px",
           }}
         >
           <img
@@ -138,7 +141,7 @@ const DuelCardTopicsArea = () => {
               flex: 1,
               border: "none",
               outline: "none",
-              fontSize: "14px",
+              fontSize: isSm?"10px":"14px",
               color: "black",
             }}
           />

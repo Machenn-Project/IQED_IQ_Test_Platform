@@ -1,31 +1,37 @@
 // ExplorePage.js
-import { Box, Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import React from "react";
 import { MainNavBar, SidebarContent } from "../commonComponents";
 import { trophy, Vs } from "../assets";
 import { ContestCardArea, DuelCardTopicsArea } from "../components";
-
-
+import PeopleIcon from "@mui/icons-material/People";
 const Contest = [
   {
-    Title: 'Mixed Questions',
+    Title: "Mixed Questions",
     listItems: [
       "There are 30 multiple choice questions.",
       "Approximate test time: Fifteen minutes.",
       "The questions are of varying difficulty.",
-      "All questions are worth the same points."
+      "All questions are worth the same points.",
     ],
-    image: Vs
+    image: Vs,
   },
   {
-    Title: 'Mixed Questions',
+    Title: "Mixed Questions",
     listItems: [
       "There are 30 multiple choice questions.",
       "Approximate test time: Fifteen minutes.",
       "The questions are of varying difficulty.",
-      "All questions are worth the same points."
+      "All questions are worth the same points.",
     ],
-    image: Vs
+    image: Vs,
   },
 ];
 
@@ -78,7 +84,7 @@ const ContestPage = () => {
           <Box
             sx={{
               display: "flex",
-              flexDirection: "column",
+              flexDirection: isSm ? "column" : "row",
               flexGrow: 0,
               gap: isSm ? "10px" : "20px",
               bgcolor: "#1A49BA",
@@ -87,42 +93,107 @@ const ContestPage = () => {
               borderRadius: "10px",
             }}
           >
-            <Typography
-              variant={isSm ? "h6" : "h4"}
+            <Box
               sx={{
-                color: "White",
-                textTransform: "uppercase",
-                fontWeight: "bold",
+                display: "flex",
+                flexDirection: "column",
+                flexGrow: 0,
+                gap: isSm ? "10px" : "20px",
               }}
             >
-              Welcome to the 1 vs 1 Duel Arena!
-            </Typography>
-            <Typography
+              <Typography
+                variant={isSm ? "h6" : "h4"}
+                sx={{
+                  color: "White",
+                  textTransform: "uppercase",
+                  fontWeight: "bold",
+                }}
+              >
+                Welcome to the 1 vs 1 Duel Arena!
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: isSm?"10px":"12px",
+                  color: "White",
+                  fontWeight: 400,
+                }}
+              >
+                Step into the arena and challenge your friends in a thrilling
+                one-on-one quiz battle! {isSm ? null : <br />}
+                Test your knowledge with AI-crafted questions, outsmart your
+                opponent, and claim the crown as the ultimate quiz champion.
+                It's time to see who really has what it takes!
+              </Typography>
+            </Box>
+            <Box
               sx={{
-                fontSize: "12px",
-                color: "White",
-                fontWeight: 400,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent:'center',
+                flexGrow: 1,
+                bgcolor: "white",
+                p: "10px",
+                borderRadius: "10px",
+                gap:'10px'
               }}
             >
-              Step into the arena and challenge your friends in a thrilling one-on-one quiz battle! {isSm ? null : <br />} 
-              Test your knowledge with AI-crafted questions, outsmart your opponent, 
-              and claim the crown as the ultimate quiz champion. It's time to see who really has what it takes!
-            </Typography>
-          </Box>  
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  backgroundColor: "#fff",
+                  borderRadius: "5px",
+                  padding: "5px 10px",
+                  border: "2px solid",
+                  borderColor: "#02216F",
+                }}
+              >
+                <input
+                  placeholder="Enter a join code"
+                  value={''}
+                  onChange={""}
+                  style={{
+                    flex: 1,
+                    border: "none",
+                    outline: "none",
+                    fontSize: "14px",
+                    color: "black",
+                  }}
+                />
+              </Box>
+              <Button
+                type="submit"
+                fullWidth
+                startIcon={<PeopleIcon />}
+                variant="contained"
+                sx={{
+                  fontWeight: "bold",
+                  backgroundColor: "#1A49BA",
+                  color: "#ffffff",
+                  "&:hover": {
+                    backgroundColor: "Black",
+                  },
+                  boxShadow: "2px 3px #FFDA55",
+                }}
+              >
+                Join
+              </Button>
+            </Box>
+          </Box>
 
           {/* Bottom card area */}
           {/* <ContestCardArea contestData={Contest} />  */}
-          <DuelCardTopicsArea contestData={Contest} /> 
+          <DuelCardTopicsArea contestData={Contest} />
         </Box>
       </Box>
       <Box
         sx={{
           width: isSm ? "100%" : "400px",
           height: isSm ? "60px" : "auto",
-          boxShadow: isSm ? null : "0 0 5px 6px #9C9999", 
+          boxShadow: isSm ? null : "0 0 5px 6px #9C9999",
         }}
       >
-        <SidebarContent/>
+        <SidebarContent />
       </Box>
     </Box>
   );

@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { AI_Icon, qr } from "../assets"; // Ensure these paths are correct
 import TopicIcon from "@mui/icons-material/Topic";
-import { useLocation } from "react-router-dom"; // Import useLocation
+import { useLocation,useNavigate  } from "react-router-dom"; // Import useLocation
 
 // Sub-component for the header area with exit button
 const LobbyHeader = ({ onExit, isSm }) => (
@@ -151,10 +151,12 @@ const PlayerLobby = () => {
   const guests = [{ name: "Singh", avatar: "/path_to_image/singh.png" }]; // Dummy data
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
+  
+  const navigate = useNavigate(); // Get the navigate function
 
   const handleExit = () => {
-    // Logic for exiting the lobby
-    console.log("Exit clicked");
+    // Navigate to the contest page
+    navigate("/contest"); // Adjust the path to your contest page
   };
 
   return (
