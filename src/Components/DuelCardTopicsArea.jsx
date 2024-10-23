@@ -17,18 +17,18 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import CardActionArea from "@mui/material/CardActionArea";
 import { AI_Icon, MathImg } from "../assets"; // Adjust the import path as needed
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Grow ref={ref} {...props} />;
 });
 
 const DuelCardTopicsArea = () => {
-  // State to manage the dialog
+  const navigate = useNavigate(); // Initialize useNavigate
   const [open, setOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
-  const [searchInput, setSearchInput] = useState(""); // State for search input
+  const [searchInput, setSearchInput] = useState("");
 
-  // Array of card data
   const cardData = [
     { id: 1, title: "Types of Numbers", image: MathImg, questions: 10 },
     { id: 2, title: "Prime Numbers", image: MathImg, questions: 15 },
@@ -43,13 +43,11 @@ const DuelCardTopicsArea = () => {
     { id: 11, title: "Square Roots", image: MathImg, questions: 13 },
   ];
 
-  // Function to handle card click
   const handleCardClick = (card) => {
     setSelectedCard(card);
     setOpen(true);
   };
 
-  // Function to handle dialog close
   const handleClose = () => {
     setOpen(false);
     setTimeout(() => {
@@ -57,15 +55,25 @@ const DuelCardTopicsArea = () => {
     }, 300);
   };
 
-  // Function to handle input change
   const handleSearchInputChange = (event) => {
     setSearchInput(event.target.value);
   };
 
-  // Filtered card data based on search input
   const filteredCards = cardData.filter((card) =>
     card.title.toLowerCase().includes(searchInput.toLowerCase())
   );
+
+  const handleChallengeFriend = () => {
+    if (selectedCard) {
+      navigate('/PlayerLobby', {
+        state: { 
+          topic: selectedCard.title,
+          questions: selectedCard.questions
+        },
+      });
+    }
+    handleClose();
+  };
 
   return (
     <Box
@@ -124,8 +132,8 @@ const DuelCardTopicsArea = () => {
         >
           <input
             placeholder="Search Topics"
-            value={searchInput} // Bind the input value to the state
-            onChange={handleSearchInputChange} // Handle input change
+            value={searchInput}
+            onChange={handleSearchInputChange}
             style={{
               flex: 1,
               border: "none",
@@ -137,7 +145,6 @@ const DuelCardTopicsArea = () => {
         </Box>
       </Box>
 
-      {/* Grid layout for cards */}
       <Grid container spacing={2}>
         {filteredCards.map((card) => (
           <Grid item xs={6} sm={4} md={3} key={card.id}>
@@ -150,7 +157,7 @@ const DuelCardTopicsArea = () => {
                   boxShadow: "2px 3px #02216F",
                 },
               }}
-              onClick={() => handleCardClick(card)} // Add onClick event
+              onClick={() => handleCardClick(card)}
             >
               <CardActionArea>
                 <CardMedia
@@ -174,7 +181,7 @@ const DuelCardTopicsArea = () => {
                       sx={{
                         fontWeight: "bold",
                         textOverflow: "ellipsis",
-                        whiteSpace: "normal", // Allows the text to wrap to the next line
+                        whiteSpace: "normal",
                         overflow: "hidden",
                       }}
                     >
@@ -188,7 +195,6 @@ const DuelCardTopicsArea = () => {
         ))}
       </Grid>
 
-      {/* Dialog for displaying card details */}
       <Dialog
         open={open}
         onClose={handleClose}
@@ -253,6 +259,7 @@ const DuelCardTopicsArea = () => {
                   fullWidth
                   startIcon={<PeopleIcon />}
                   variant="contained"
+                  onClick={handleChallengeFriend} // Call the function here
                   sx={{
                     fontWeight: "bold",
                     backgroundColor: "#1A49BA",

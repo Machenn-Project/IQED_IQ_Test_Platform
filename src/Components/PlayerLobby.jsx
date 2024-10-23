@@ -1,26 +1,41 @@
 import React from "react";
-import { Box, Typography, Button, Stack, Divider, Avatar } from "@mui/material";
-import { qr } from "../assets";
+import {
+  Box,
+  Typography,
+  Button,
+  Stack,
+  Divider,
+  Avatar,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
+import { AI_Icon, qr } from "../assets"; // Ensure these paths are correct
+import TopicIcon from "@mui/icons-material/Topic";
+import { useLocation } from "react-router-dom"; // Import useLocation
 
 // Sub-component for the header area with exit button
-const LobbyHeader = ({ onExit }) => (
-  <Box
-    sx={{
-      m: "10px",
-      display: "flex",
-      justifyContent: "space-between",
-      height: "5%",
-    }}
-  >
+const LobbyHeader = ({ onExit, isSm }) => (
+  <Box sx={{ display: "flex", justifyContent: "space-between" }}>
     <Typography variant="h5" sx={{ fontWeight: "600", color: "#02216F" }}>
       Challenge Friends
     </Typography>
-    <Stack direction="row" spacing={2}>
+    <Stack direction="row" spacing={3}>
       <Button
         fullWidth
         variant="contained"
         onClick={onExit}
-        sx={buttonStyle}
+        sx={{
+          backgroundColor: "#FFF0C9",
+          color: "#02216F",
+          boxShadow: "0px 0px #02216F",
+          textTransform: "none",
+          borderRadius: "50px",
+          borderColor: "#02216F",
+          "&:hover": {
+            color: "#fff",
+            backgroundColor: "#02216F",
+          },
+        }}
       >
         Exit
       </Button>
@@ -29,22 +44,40 @@ const LobbyHeader = ({ onExit }) => (
 );
 
 // Sub-component for the QR code and match info
-const QRCodeSection = ({ qrImage, matchLink, matchCode }) => (
+const QRCodeSection = ({ qrImage, matchLink, matchCode, isSm }) => (
   <Box
     sx={{
       backgroundColor: "#ADBFEA",
       padding: "20px",
       borderRadius: "12px",
       display: "flex",
+      flexDirection: isSm ? "column" : "row",
       gap: "20px",
-      width: "95%",
       justifyContent: "center",
     }}
   >
-    <Box sx={{ bgcolor: "white" }}>
-      <img src={qrImage} alt="QR Code" style={{ width: "150px", height: "150px" }} />
+    <Box
+      sx={{
+        bgcolor: "white",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        borderRadius: "10px",
+      }}
+    >
+      <img
+        src={qrImage}
+        alt="QR Code"
+        style={{ width: "200px", height: "200px" }}
+      />
     </Box>
-    <Box>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
       <Typography variant="h6" sx={{ mt: 2 }}>
         Link: {matchLink}
       </Typography>
@@ -53,7 +86,16 @@ const QRCodeSection = ({ qrImage, matchLink, matchCode }) => (
       </Typography>
       <Button
         variant="contained"
-        sx={startButtonStyle}
+        sx={{
+          mt: 2,
+          backgroundColor: "#00b894",
+          color: "#fff",
+          textTransform: "none",
+          px: 4,
+          "&:hover": {
+            backgroundColor: "#019d75",
+          },
+        }}
       >
         Start Match
       </Button>
@@ -66,7 +108,6 @@ const GuestList = ({ guests }) => (
   <Box
     sx={{
       flexGrow: 1,
-      width: "95%",
       borderRadius: "12px",
       padding: "20px",
       border: "1px solid",
@@ -93,93 +134,151 @@ const GuestList = ({ guests }) => (
 
 // Main PlayerLobby component
 const PlayerLobby = () => {
+  const location = useLocation(); // Access the location object
+  const { topic, questions } = location.state || {}; // Destructure passed state
   const guests = [{ name: "Singh", avatar: "/path_to_image/singh.png" }]; // Dummy data
+  const theme = useTheme();
+  const isSm = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const handleExit = () => {
+    // Logic for exiting the lobby
+    console.log("Exit clicked");
+  };
 
   return (
-    <Box sx={containerStyle}>
-      <Box sx={innerContainerStyle}>
-        <Stack direction={{ xs: "column", md: "row" }} spacing={2} sx={{ height: "100%" }}>
-          <Box sx={quizAreaStyle}>
-            <Box sx={{ width: "98%", height: "98%" }}>
-              <LobbyHeader onExit={() => console.log("Exit clicked")} />
-              <Divider sx={dividerStyle} />
-              <Box sx={contentStyle}>
-                <QRCodeSection qrImage={qr} matchLink="iqed.com/match" matchCode="46283" />
-                <GuestList guests={guests} />
-              </Box>
+    <Box
+      sx={{
+        height: "100%",
+        width: "100%",
+        display: "flex",
+        flexDirection: isSm ? "column-reverse" : "row",
+        boxSizing: "border-box",
+      }}
+    >
+      <Box
+        sx={{
+          p: isSm ? "0px" : "16px",
+          flexGrow: 1,
+          display: "flex",
+          boxSizing: "border-box",
+          gap: isSm ? null : "20px",
+        }}
+      >
+        <Box
+          sx={{
+            flexGrow: 1,
+            display: "flex",
+            flexDirection: isSm ? "column" : "row",
+            boxSizing: "border-box",
+            ml: isSm ? "10px" : "10px",
+            mr: isSm ? null : "10px",
+            mt: isSm ? "10px" : "10px",
+            mb: isSm ? "10px" : "10px",
+            pr: isSm ? "10px" : null,
+            gap: "20px",
+            boxSizing: "border-box",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              flexGrow: 0,
+              height: isSm ? null : "20%",
+              width: isSm ? null : "30%",
+              gap: isSm ? "10px" : "20px",
+              bgcolor: "#FFDA55",
+              boxSizing: "border-box",
+              p: "20px",
+              borderRadius: "10px",
+              color: "#02216F",
+              border: "1px solid",
+              borderColor: "#02216F",
+              boxShadow: "3px 5px #02216F",
+            }}
+          >
+            <Typography
+              variant={isSm ? "h6" : "h5"}
+              sx={{
+                display: "flex",
+                gap: "10px",
+                fontWeight: "bold",
+                alignItems: "center",
+              }}
+            >
+              <TopicIcon />
+              Topics Details
+            </Typography>
+            <Box
+              sx={{
+                bgcolor: "#1A49BA",
+                p: "10px",
+                color: "white",
+                display: "flex",
+                flexDirection: "row",
+                borderRadius: "10px",
+                alignItems: 'center'
+              }}
+            >
+              <Typography
+                sx={{
+                  fontSize: "14px",
+                  fontWeight: "bold",
+                  width: '60%',
+                }}
+              >
+                {topic} {/* Display the passed topic */}
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: "14px",
+                  fontWeight: "bold",
+                }}
+              >
+                {questions} Qus {/* Display the number of questions */}
+              </Typography>
             </Box>
           </Box>
-        </Stack>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: "flex",
+              flexDirection: "column",
+              width: "100%",
+              bgcolor: "white",
+              height: "100%",
+              borderRadius: "20px",
+              border: "1px solid",
+              borderColor: "#02216F",
+              boxShadow: "5px 6px #02216F",
+              display: "flex",
+              boxSizing: "border-box",
+              p: "20px",
+              gap: "10px",
+            }}
+          >
+            <LobbyHeader onExit={handleExit} isSm={isSm} />
+            <Divider sx={{ bgcolor: "#FFDA55", mb: "3%", height: "2px" }} />
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+              }}
+            >
+              <QRCodeSection
+                qrImage={qr}
+                matchLink="iqed.com/match"
+                matchCode="46283"
+                isSm={isSm}
+              />
+              <GuestList guests={guests} />
+            </Box>
+          </Box>
+        </Box>
       </Box>
     </Box>
   );
-};
-
-// Common styles
-const containerStyle = {
-  display: "flex",
-  flexDirection: "column",
-  minHeight: "100vh",
-  alignItems: "center",
-  justifyContent: "center",
-};
-
-const innerContainerStyle = {
-  width: { xs: "calc(100vw - 30px)", md: "calc(100vw - 80px)" },
-  height: { xs: "calc(100vh - 30px)", md: "calc(100vh - 80px)" },
-};
-
-const quizAreaStyle = {
-  width: "100%",
-  bgcolor: "white",
-  height: "100%",
-  borderRadius: "20px",
-  boxShadow: "5px 6px #02216F",
-  border: "1px solid",
-  borderColor: "#02216F",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-};
-
-const dividerStyle = {
-  bgcolor: "#FFDA55",
-  mb: "3%",
-  height: "2px",
-};
-
-const contentStyle = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  width: "100%",
-  height: "85%",
-  gap: "10px",
-};
-
-const buttonStyle = {
-  backgroundColor: "#FFF0C9",
-  color: "#02216F",
-  boxShadow: "0px 0px #02216F",
-  textTransform: "none",
-  borderRadius: "50px",
-  borderColor: "#02216F",
-  px: "20px",
-  "&:hover": {
-    color: "#fff",
-    backgroundColor: "#02216F",
-  },
-};
-
-const startButtonStyle = {
-  mt: 2,
-  backgroundColor: "#00b894",
-  color: "#fff",
-  textTransform: "none",
-  px: 4,
-  "&:hover": {
-    backgroundColor: "#019d75",
-  },
 };
 
 export default PlayerLobby;
