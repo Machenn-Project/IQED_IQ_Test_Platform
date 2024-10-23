@@ -113,7 +113,7 @@ export default function LevelDetails(LevelData) {
   };
 
   const setLevel = LevelData.LevelData;
-  console.log("setLevel",setLevel)
+  console.log("setLevel",setLevel)  
   const currentLevelData = DaTa[setLevel - 1].categories; 
   return (
     <Box>

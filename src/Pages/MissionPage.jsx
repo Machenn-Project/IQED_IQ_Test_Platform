@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Grid, useMediaQuery, useTheme } from "@mui/material";
-import {MainNavBar,Levelcard, SidebarContent } from "../commonComponents";
-import { LevelDetails} from "../components";
+import { MainNavBar, Levelcard, SidebarContent } from "../commonComponents";
+import { LevelDetails } from "../components";
 import { BreadcrumbsNav } from "../commonComponents";
 import { trophy } from "../assets";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+
 // Mock data for levels
 const levels = [
   { level: 1, total: 10, progress: 5, image: trophy },
@@ -18,15 +19,33 @@ const MissionPage = () => {
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
   const location = useLocation();
+  const navigate = useNavigate(); // Use useNavigate instead of useHistory
   const { state } = location;
   const inLevel = state ? state.inLevel : undefined;
   const currentLevel = inLevel ? inLevel.level : undefined;
   const [selectedLevel, setSelectedLevel] = useState(currentLevel);
 
+  // Update selected level based on URL parameter
+  useEffect(() => {
+    const levelFromUrl = new URLSearchParams(location.search).get("level");
+
+    if (levelFromUrl) {
+        const level = levels.find(l => l.level === parseInt(levelFromUrl, 10));
+        if (level) {
+            setSelectedLevel(level);
+        } else {
+            setSelectedLevel(null); // Reset if level not found
+        }
+    } else {
+        setSelectedLevel(null); // Reset to null if no level in URL
+    }
+}, [location]); // Now listening to the entire location object
+
+
   // Breadcrumb paths
   const breadcrumbPath = selectedLevel
     ? [
-        { label: "Levels", to: null, onClick: () => setSelectedLevel(null) }, // Clickable to return to level cards
+        { label: "Levels", to: null, onClick: () => handleReturnToLevels() }, // Clickable to return to level cards
         { label: `Level - ${selectedLevel.level}`, to: null },
       ]
     : [{ label: "Levels", to: null }];
@@ -34,8 +53,15 @@ const MissionPage = () => {
   // Handler to select a level
   const handleSelectLevel = (level) => {
     setSelectedLevel(level);
+    navigate(`/Missions?level=${level.level}`); // Update URL with selected level
+};
+
+  // Handler to return to levels
+  const handleReturnToLevels = () => {
+    setSelectedLevel(null);
+    navigate("/Missions"); // Navigate back to levels
   };
- 
+
   return (
     <Box
       sx={{
@@ -106,10 +132,7 @@ const MissionPage = () => {
                   </Grid>
                 ))
               ) : (
-                (() => {
-                  console.log("dsdsdsd",selectedLevel.level);
-                  return <LevelDetails LevelData={selectedLevel.level} />;
-                })()
+                <LevelDetails LevelData={selectedLevel.level} />
               )}
             </Grid>
           </Box>
@@ -117,19 +140,13 @@ const MissionPage = () => {
       </Box>
       <Box
         sx={{
-          // bgcolor: "red",
           width: isSm ? "100%" : "400px",
           height: isSm ? "60px" : "auto",
-          boxShadow: isSm ? null : "0 0 5px 6px #9C9999", 
+          boxShadow: isSm ? null : "0 0 5px 6px #9C9999",
         }}
       >
-        <SidebarContent/>
+        <SidebarContent />
       </Box>
-      {/* {isSm ? (
-        <Box sx={{ width: "100%", height: "60px" }}>
-          <SidebarContent />
-        </Box>
-      ) : null} */}
     </Box>
   );
 };
