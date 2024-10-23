@@ -164,7 +164,7 @@ const ContestPage = () => {
               <Button
                 type="submit"
                 fullWidth
-                startIcon={<PeopleIcon />}
+                // startIcon={<PeopleIcon />}
                 variant="contained"
                 sx={{
                   fontWeight: "bold",
