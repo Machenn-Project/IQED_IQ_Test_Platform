@@ -11,6 +11,7 @@ import {
 import { useTheme, useMediaQuery } from "@mui/material";
 import { Coin, FireIcon, RankIcon } from "../assets";
 import { Edit } from "@mui/icons-material";
+import { useSelector } from "react-redux";
 const StatBox = ({ icon, value, label }) => (
   <Box
     sx={{
@@ -51,6 +52,7 @@ const StatBox = ({ icon, value, label }) => (
 );
 
 const ProfileCard = () => {
+  const UserData = useSelector((state) => state.UserState);
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -107,7 +109,8 @@ const ProfileCard = () => {
                 gap: 1,
               }}
             >
-              ALEX
+              {UserData.Name?UserData.Name:"Puvi"}
+            
               <IconButton sx={{ color: "#fff", padding: 0 }}>
                 <Edit sx={{ fontSize: 20 }} />
               </IconButton>
@@ -120,7 +123,7 @@ const ProfileCard = () => {
                 whiteSpace: "nowrap",
               }}
             >
-              2573 XP
+              10 XP
             </Typography>
           </Box>
         </Grid>
@@ -171,7 +174,7 @@ const ProfileCard = () => {
               >
                 <LinearProgress
                   variant="determinate"
-                  value={(1 / 6) * 100}
+                  value={(0.1 / 6) * 100}
                   sx={{
                     height: 10,
                     borderRadius: 10,
@@ -192,13 +195,13 @@ const ProfileCard = () => {
       {/* Stats Section */}
       <Grid container spacing={2} sx={{ flexGrow: 1, height: "100%" }}>
         <Grid item xs={4}>
-          <StatBox icon={Coin} value={567} label="Total IQ Coins" />
+          <StatBox icon={Coin} value={0} label="Total IQ Coins" />
         </Grid>
         <Grid item xs={4}>
-          <StatBox icon={FireIcon} value={52} label="Total Strike" />
+          <StatBox icon={FireIcon} value={2} label="Total Strike" />
         </Grid>
         <Grid item xs={4}>
-          <StatBox icon={RankIcon} value={52} label="Rank" />
+          <StatBox icon={RankIcon} value={1} label="Rank" />
         </Grid>
       </Grid>
     </Box>

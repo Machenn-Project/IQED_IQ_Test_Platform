@@ -3,13 +3,14 @@ import { createSlice, configureStore } from '@reduxjs/toolkit';
 const UserSlice = createSlice({
   name: 'UserState',
   initialState: {
-    Name: "11111",
-    Email: "sss",
+    Name: "",
+    Email: "",
     Age: "",
     Password: "",
     School_Name: "",
     Grade: "",
-    Mobile_Number: ""
+    Mobile_Number: "",
+    streak:2
   },
   reducers: {
     UpdateUser: (state, action) => {

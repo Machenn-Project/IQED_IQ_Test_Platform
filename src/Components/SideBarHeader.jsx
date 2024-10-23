@@ -15,6 +15,7 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Coin, FireIcon, RankIcon } from "../assets";
+import { useSelector } from "react-redux";
 
 const formatDate = (date) => {
   return date.toLocaleDateString("en-US", {
@@ -26,6 +27,7 @@ const formatDate = (date) => {
 };
 
 const SideBarHeader = () => {
+  const UserData = useSelector((state) => state.UserState);
   const theme = useTheme();
   const currentDate = new Date();
   const formattedDate = formatDate(currentDate);
@@ -98,12 +100,13 @@ const SideBarHeader = () => {
           <img src={FireIcon} alt="Fire Icon" width={30} height={30} />
         </Box>
         <Typography variant="h6" sx={{ fontWeight: 600, fontSize: "16px" }}>
-          50
+          {UserData.streak}
         </Typography>
       </Box>
 
       {isSm ? (
         <>
+        
           <Box
             sx={{
               display: "flex",
@@ -215,9 +218,6 @@ const SideBarHeader = () => {
           }}
         >
           <MenuItem onClick={handleAccountSettings}>
-            <ListItemIcon>
-              <AccountCircleIcon fontSize="small" />
-            </ListItemIcon>
             Account Settings
           </MenuItem>
           <MenuItem onClick={handleLogout}>

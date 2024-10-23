@@ -81,7 +81,7 @@ const SidebarContent = () => {
                       bgcolor: "#ddd",
                     }}
                   >
-                    {index === 0 ? null : (
+                    {index === 0 || index === 1 || index === 4|| index === 5|| index === 6 ? null : (
                       <img
                         src={FireIcon}
                         alt="Fire Icon"
@@ -114,13 +114,13 @@ const SidebarContent = () => {
           p: "15px",
         }}
       >
-        <StatsCard title={"IQ Gems"} CoinCount={2500} icon={Coin} />
-        <StatsCard title={"Rank"} CoinCount={20} icon={RankIcon} />
+        <StatsCard title={"IQ Gems"} CoinCount={0} icon={Coin} />
+        <StatsCard title={"Rank"} CoinCount={1} icon={RankIcon} />
         <LevelTagCard
           Level={1}
           goal={20}
-          progress={3}
-          title={"10%"}
+          progress={1}
+          title={"1%"}
           icon={<WorkspacePremiumIcon />}
         />
       </Box>
